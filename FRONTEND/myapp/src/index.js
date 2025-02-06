@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-import Account from './VueWebsite/Account';
+// import Account from './VueWebsite/Account';
 
 const theme = createTheme(); // Default Material UI theme
 
@@ -12,8 +12,8 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
-      {/* <App /> */}
-      <Account />
+      <App />
+      {/* <Account /> */}
     </ThemeProvider>
   </React.StrictMode>
 );

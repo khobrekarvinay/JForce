@@ -10,6 +10,7 @@ import ExpenseList from "./components/ExpenseList";
 import UpdateExpense from "./components/UpdateExpense";
 import MaterialUIDemo from "./components/MaterialUI";
 import LoginPage from "./components/Vuexy";
+import AccountPage from "./VueWebsite/Mainacc";
 
 
 const App = () => {
@@ -26,6 +27,7 @@ const App = () => {
         <Route path="/update-expense/:id" element={<UpdateExpense />} /> */}
         <Route path="/" element={<MaterialUIDemo/>} />
         <Route path="/abc" element={<LoginPage/>} />
+        <Route path="/qwerty" element={<AccountPage/>} />
 
       </Routes>
     </Router>
