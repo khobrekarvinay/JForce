@@ -8,6 +8,9 @@ import Welcome from "./components/Welcome";
 import AddExpense from "./components/AddExpense";
 import ExpenseList from "./components/ExpenseList";
 import UpdateExpense from "./components/UpdateExpense";
+import MaterialUIDemo from "./components/MaterialUI";
+import LoginPage from "./components/Vuexy";
+
 
 const App = () => {
   return (
@@ -15,12 +18,15 @@ const App = () => {
        {/* ToastContainer added here */}
        <ToastContainer position="top-center" autoClose={2000} />
       <Routes>
-        <Route path="/" element={<Login />} />
+        {/* <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/welcome" element={<Welcome />} />
         <Route path="/add-expense" element={<AddExpense />} />
         <Route path="/expense-list" element={<ExpenseList />} />
-        <Route path="/update-expense/:id" element={<UpdateExpense />} />
+        <Route path="/update-expense/:id" element={<UpdateExpense />} /> */}
+        <Route path="/" element={<MaterialUIDemo/>} />
+        <Route path="/abc" element={<LoginPage/>} />
+
       </Routes>
     </Router>
   );
