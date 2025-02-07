@@ -27,14 +27,12 @@ import {
 } from '@mui/material';
 import { styled as muiStyled } from '@mui/material/styles';
 import CreditCardIcon from '@mui/icons-material/CreditCard';
-// import PaypalIcon from '@mui/icons-material/Paypal';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import Alert from '@mui/material/Alert';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 
-// Styled Components
 const CenteredBox = styled(Box)({
     display: 'flex',
     justifyContent: 'center',
@@ -66,14 +64,12 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     '&:nth-of-type(odd)': {
         backgroundColor: theme.palette.action.hover
     },
-    // hide last border
     '&:last-child td, &:last-child th': {
         border: 0
     }
 }));
 
 const mockBillingData = [
-    // example Billing data, use it on your local device
     {
         id: '#5089',
         client: 'Jamal Kerrod',
@@ -471,12 +467,13 @@ function BillingContent() {
                                             <TableCell>{row.issuedDate}</TableCell>
                                             <TableCell>{row.balance}</TableCell>
                                             <TableCell>
-                                                <IconButton aria-label="view">
-                                                    <VisibilityIcon />
-                                                </IconButton>
                                                 <IconButton aria-label="delete">
                                                     <DeleteIcon />
                                                 </IconButton>
+                                                <IconButton aria-label="view">
+                                                    <VisibilityIcon />
+                                                </IconButton>
+                                               
                                                 <IconButton aria-label="more">
                                                     <MoreVertIcon />
                                                 </IconButton>
