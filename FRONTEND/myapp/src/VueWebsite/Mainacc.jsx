@@ -1,6 +1,6 @@
 import React from 'react';
-import { Box, Tabs, Tab, Typography, styled } from '@mui/material'; // React and Material-UI components
-import Account from './Account'; // Import the AccountContent
+import { Box, Tabs, Tab, Typography, styled, useMediaQuery, useTheme } from '@mui/material';
+import Account from './Account';
 import SecurityContent from './Secuirty';
 import BillingContent from './Billing&Plans';
 import NotificationsContent from './Notifications';
@@ -17,8 +17,7 @@ const StyledTab = styled(Tab)(({ theme }) => ({
   },
 }));
 
-
-function TabPanel(props) {  // Same as before
+function TabPanel(props) {
   const { children, value, index, ...other } = props;
   return (
     <div
@@ -45,7 +44,9 @@ function a11yProps(index) {
 }
 
 function AccountPage() {
-  const [tabValue, setTabValue] = React.useState(0); // Default to Account tab (index 0)
+  const [tabValue, setTabValue] = React.useState(0);
+  const theme = useTheme();
+  const isSidebarHidden = useMediaQuery(theme.breakpoints.down('lg'));
 
   const handleChange = (event, newValue) => {
     setTabValue(newValue);
@@ -78,7 +79,6 @@ function AccountPage() {
       <TabPanel value={tabValue} index={4}>
         <ConnectionsContent />
       </TabPanel>
-      <Footer />
     </Box>
   );
 }
