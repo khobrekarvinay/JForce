@@ -5,6 +5,7 @@ import SecurityContent from './Secuirty';
 import BillingContent from './Billing&Plans';
 import NotificationsContent from './Notifications';
 import ConnectionsContent from './ConnectionsContent';
+import Footer from './Footer';
 
 const StyledTab = styled(Tab)(({ theme }) => ({
   fontSize: '14px',
@@ -77,6 +78,7 @@ function AccountPage() {
       <TabPanel value={tabValue} index={4}>
         <ConnectionsContent />
       </TabPanel>
+      <Footer />
     </Box>
   );
 }

@@ -3,3 +3,7 @@
 // <div> tag is replaced by <box> and <style> tag is replaced by <sx> 
 
 // A Dropdown list in html used <select> and <option> tags. In material we use
+
+// Box: The Box component serves as a wrapper component
+
+// Stack: Stack is like a flex container.
