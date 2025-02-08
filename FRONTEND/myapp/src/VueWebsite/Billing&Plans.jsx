@@ -24,7 +24,8 @@ import {
     TableRow,
     Checkbox,
     Stack,
-    RadioGroup
+    RadioGroup,
+    Avatar
 } from '@mui/material';
 import { styled as muiStyled } from '@mui/material/styles';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -208,6 +209,20 @@ const mockBillingData = [
         balance: '$666'
     }
 ];
+function stringToColor() {
+    const r = Math.floor(Math.random() * 256);
+    const g = Math.floor(Math.random() * 256);
+    const b = Math.floor(Math.random() * 256);
+    return `rgb(${r}, ${g}, ${b})`;
+}
+function stringAvatar(name) {
+    return {
+        sx: {
+            bgcolor: stringToColor(name),
+        },
+        children: `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`,
+    };
+}
 
 function BillingContent() {
     // Billing History Table State
@@ -402,12 +417,12 @@ function BillingContent() {
                         gap: 2
                     }}>
                         <Alert severity="warning" icon={<WarningAmberIcon />}
-                        sx={{
-                            '& .MuiAlert-message': {
-                                fontFamily: '"Public Sans", sans-serif',
-                                color: '#ffa54f' // Change text color to yellow
-                            }
-                        }} >
+                            sx={{
+                                '& .MuiAlert-message': {
+                                    fontFamily: '"Public Sans", sans-serif',
+                                    color: '#ffa54f' // Change text color to yellow
+                                }
+                            }} >
                             <Typography variant="subtitle1" sx={{ // Increase font size by using subtitle1 instead of subtitle2
                                 fontWeight: 600,
                                 mb: 0.5,
@@ -559,7 +574,7 @@ function BillingContent() {
                         </Stack>
                         <Box sx={{ mt: 2, display: 'flex', gap: 1 }}>
                             <Button variant="contained" color="primary" sx={{ bgcolor: '#6c5ce7' }}>Save Changes</Button>
-                            <Button variant="contained" color="error" sx={{ bgcolor: '#ebebed' }}>Cancel</Button>
+                            <Button variant="contained" color="error" sx={{ bgcolor: '#9c9ea8' }}>Cancel</Button>
                         </Box>
                     </Box>
                 </CardContent>
@@ -628,189 +643,83 @@ function BillingContent() {
             </Box>
             {/* Billing History Card */}
             <Card sx={{ mt: 3, boxShadow: '0px 2px 10px rgba(76, 78, 100, 0.22)' }}>
-    <CardContent>
-        <Typography 
-            variant="h6" 
-            sx={{ 
-                mb: 3,
-                fontSize: '1.25rem',
-                fontWeight: 500,
-                fontFamily: '"Public Sans", sans-serif'
-            }}
-        >
-            Billing History
-        </Typography>
-        <TableContainer>
-            <Table sx={{ minWidth: 650 }} aria-label="billing history table">
-                <TableHead>
-                    <TableRow>
-                        <TableCell 
-                            sx={{ 
-                                borderBottom: '1px solid rgba(76, 78, 100, 0.2)',
-                                py: 2,
-                                fontSize: '0.75rem',
-                                fontWeight: 600,
-                                color: 'text.secondary',
-                                fontFamily: '"Public Sans", sans-serif'
-                            }}
-                        >
-                            Invoice ID
-                        </TableCell>
-                        <TableCell 
-                            sx={{ 
-                                borderBottom: '1px solid rgba(76, 78, 100, 0.2)',
-                                py: 2,
-                                fontSize: '0.75rem',
-                                fontWeight: 600,
-                                color: 'text.secondary',
-                                fontFamily: '"Public Sans", sans-serif'
-                            }}
-                        >
-                            Client
-                        </TableCell>
-                        <TableCell 
-                            sx={{ 
-                                borderBottom: '1px solid rgba(76, 78, 100, 0.2)',
-                                py: 2,
-                                fontSize: '0.75rem',
-                                fontWeight: 600,
-                                color: 'text.secondary',
-                                fontFamily: '"Public Sans", sans-serif'
-                            }}
-                        >
-                            Software
-                        </TableCell>
-                        <TableCell 
-                            sx={{ 
-                                borderBottom: '1px solid rgba(76, 78, 100, 0.2)',
-                                py: 2,
-                                fontSize: '0.75rem',
-                                fontWeight: 600,
-                                color: 'text.secondary',
-                                fontFamily: '"Public Sans", sans-serif'
-                            }}
-                        >
-                            Total
-                        </TableCell>
-                        <TableCell 
-                            sx={{ 
-                                borderBottom: '1px solid rgba(76, 78, 100, 0.2)',
-                                py: 2,
-                                fontSize: '0.75rem',
-                                fontWeight: 600,
-                                color: 'text.secondary',
-                                fontFamily: '"Public Sans", sans-serif'
-                            }}
-                        >
-                            Issued Date
-                        </TableCell>
-                        <TableCell 
-                            sx={{ 
-                                borderBottom: '1px solid rgba(76, 78, 100, 0.2)',
-                                py: 2,
-                                fontSize: '0.75rem',
-                                fontWeight: 600,
-                                color: 'text.secondary',
-                                fontFamily: '"Public Sans", sans-serif'
-                            }}
-                        >
-                            Balance
-                        </TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {mockBillingData.map((row) => (
-                        <TableRow
-                            key={row.id}
-                            sx={{
-                                '&:nth-of-type(odd)': {
-                                    backgroundColor: 'rgba(76, 78, 100, 0.04)'
-                                },
-                                '&:hover': {
-                                    backgroundColor: 'rgba(76, 78, 100, 0.08)'
-                                }
-                            }}
-                        >
-                            <TableCell 
-                                sx={{ 
-                                    py: 2,
-                                    fontSize: '0.875rem',
-                                    fontFamily: '"Public Sans", sans-serif',
-                                    color: 'text.primary'
-                                }}
-                            >
-                                {row.id}
-                            </TableCell>
-                            <TableCell>
-                                <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                                    <Box
-                                        component="img"
-                                        src={row.image}
-                                        alt={`${row.client} avatar`}
-                                        sx={{
-                                            width: 40,
-                                            height: 40,
-                                            borderRadius: '50%',
-                                            mr: 2,
-                                            backgroundColor: 'primary.light'
-                                        }}
-                                    />
-                                    <Typography 
-                                        sx={{ 
-                                            fontSize: '0.875rem',
-                                            fontFamily: '"Public Sans", sans-serif'
-                                        }}
-                                    >
-                                        {row.client}
-                                    </Typography>
-                                </Box>
-                            </TableCell>
-                            <TableCell 
-                                sx={{ 
-                                    fontSize: '0.875rem',
-                                    fontFamily: '"Public Sans", sans-serif',
-                                    color: 'text.secondary'
-                                }}
-                            >
-                                {row.software}
-                            </TableCell>
-                            <TableCell
-                                sx={{ 
-                                    fontSize: '0.875rem',
-                                    fontFamily: '"Public Sans", sans-serif',
-                                    color: 'text.primary'
-                                }}
-                            >
-                                {row.total}
-                            </TableCell>
-                            <TableCell
-                                sx={{ 
-                                    fontSize: '0.875rem',
-                                    fontFamily: '"Public Sans", sans-serif',
-                                    color: 'text.secondary'
-                                }}
-                            >
-                                {row.issuedDate}
-                            </TableCell>
-                            <TableCell>
-                                <Typography
-                                    sx={{
-                                        fontSize: '0.875rem',
-                                        fontFamily: '"Public Sans", sans-serif',
-                                        color: row.balance === 'Paid' ? 'success.main' : 'error.main',
-                                        fontWeight: 500
-                                    }}
-                                >
-                                    {row.balance}
-                                </Typography>
-                            </TableCell>
-                        </TableRow>
-                    ))}
-                </TableBody>
-            </Table>
-        </TableContainer>
-    </CardContent>
-</Card>        </Box >
+                <CardContent>
+                    <Typography
+                        variant="h6"
+                        sx={{
+                            mb: 3,
+                            fontSize: '1.25rem',
+                            fontWeight: 500,
+                            fontFamily: '"Public Sans", sans-serif'
+                        }}
+                    >
+                        Billing History
+                    </Typography>
+                    <TableContainer>
+                        <Table sx={{ minWidth: 650 }} aria-label="billing history table">
+                            <TableHead>
+                                <TableRow>
+                                    <TableCell padding="checkbox" sx={{ borderBottom: '1px solid rgba(76, 78, 100, 0.2)', py: 2, fontSize: '0.75rem', fontWeight: 600, color: 'text.secondary', fontFamily: '"Public Sans", sans-serif' }} >
+                                        <Checkbox color="primary" indeterminate={selectAll} checked={selectAll} onChange={handleSelectAllClick} />
+                                    </TableCell>
+                                    <TableCell sx={{ borderBottom: '1px solid rgba(76, 78, 100, 0.2)', py: 2, fontSize: '0.75rem', fontWeight: 600, color: 'text.secondary', fontFamily: '"Public Sans", sans-serif' }} > Invoice ID </TableCell>
+                                    <TableCell sx={{ borderBottom: '1px solid rgba(76, 78, 100, 0.2)', py: 2, fontSize: '0.75rem', fontWeight: 600, color: 'text.secondary', fontFamily: '"Public Sans", sans-serif' }} > Client </TableCell>
+                                    <TableCell sx={{ borderBottom: '1px solid rgba(76, 78, 100, 0.2)', py: 2, fontSize: '0.75rem', fontWeight: 600, color: 'text.secondary', fontFamily: '"Public Sans", sans-serif' }} > Total </TableCell>
+                                    <TableCell sx={{ borderBottom: '1px solid rgba(76, 78, 100, 0.2)', py: 2, fontSize: '0.75rem', fontWeight: 600, color: 'text.secondary', fontFamily: '"Public Sans", sans-serif' }} > Issued Date </TableCell>
+                                    <TableCell sx={{ borderBottom: '1px solid rgba(76, 78, 100, 0.2)', py: 2, fontSize: '0.75rem', fontWeight: 600, color: 'text.secondary', fontFamily: '"Public Sans", sans-serif' }} > Balance </TableCell>
+                                    <TableCell sx={{ borderBottom: '1px solid rgba(76, 78, 100, 0.2)', py: 2, fontSize: '0.75rem', fontWeight: 600, color: 'text.secondary', fontFamily: '"Public Sans", sans-serif' }} > Actions </TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {mockBillingData.map((row) => (
+                                    <TableRow key={row.id} sx={{ '&:nth-of-type(odd)': { backgroundColor: 'rgba(76, 78, 100, 0.04)' }, '&:hover': { backgroundColor: 'rgba(76, 78, 100, 0.08)' } }} >
+                                        <TableCell padding="checkbox" sx={{ py: 2, fontSize: '0.875rem', fontFamily: '"Public Sans", sans-serif', color: 'text.primary' }} >
+                                            <Checkbox color="primary" checked={isSelected(row.id)} onChange={(event) => handleClick(event, row.id)} />
+                                        </TableCell>
+                                        <TableCell sx={{ py: 2, fontSize: '0.875rem', fontFamily: '"Public Sans", sans-serif', color: 'text.primary' }} >
+                                            <Typography sx={{ color: 'primary.main' }}>{row.id}</Typography>
+                                        </TableCell>
+                                        <TableCell>
+                                            <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                                                <Avatar sx={{ bgcolor: stringToColor(), width: 40, height: 40, mr: 2 }} >
+                                                    {row.client.split(' ')[0][0]}{row.client.split(' ')[1][0]}
+                                                </Avatar>
+                                                <Box>
+                                                    <Typography sx={{ fontSize: '0.875rem', fontFamily: '"Public Sans", sans-serif' }} >
+                                                        {row.client}
+                                                    </Typography>
+                                                    <Typography component="span" sx={{ fontSize: '0.75rem', color: 'text.secondary' }} >
+                                                        {row.software}
+                                                    </Typography>
+                                                </Box>
+                                            </Box>
+                                        </TableCell>
+                                        <TableCell sx={{ py: 2, fontSize: '0.875rem', fontFamily: '"Public Sans", sans-serif', color: 'text.primary' }} >
+                                            {row.total}
+                                        </TableCell>
+                                        <TableCell sx={{ py: 2, fontSize: '0.875rem', fontFamily: '"Public Sans", sans-serif', color: 'text.secondary' }} >
+                                            {row.issuedDate}
+                                        </TableCell>
+                                        <TableCell>
+                                            <Typography sx={{ fontSize: '0.875rem', fontFamily: '"Public Sans", sans-serif', color: row.balance === 'Paid' ? 'success.main' : 'error.main', fontWeight: 500 }} >
+                                                {row.balance}
+                                            </Typography>
+                                        </TableCell>
+                                        <TableCell sx={{ py: 2, fontSize: '0.875rem', fontFamily: '"Public Sans", sans-serif', color: 'text.primary' }} >
+                                            <Stack direction="row" spacing={0}>
+                                                <Button variant="outlined" startIcon={<VisibilityIcon />} sx={{ border: 'none' }} />
+                                                <Button variant="outlined" startIcon={<DeleteIcon />} sx={{ border: 'none' }} />
+                                                <Button variant="outlined" startIcon={<MoreVertIcon />} sx={{ border: 'none' }} />
+                                            </Stack>
+                                        </TableCell>
+                                    </TableRow>
+                                ))}
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+                </CardContent>
+            </Card>
+        </Box >
     );
 }
 
