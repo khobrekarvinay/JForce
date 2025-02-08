@@ -222,8 +222,8 @@ function AccountPage() {
                     </TabPanel>
                 </Box>
             </Box>
-        </Box >
-
+            <Footer />
+        </Box>
     );
 }
 
