@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { TextField, Button, Select, MenuItem, FormControl, Box, Stack, Avatar, Typography, styled, Paper, Dialog, DialogTitle, DialogActions } from "@mui/material";
-import { Alert, AlertTitle, Card, CardContent, CardHeader, Checkbox, FormControlLabel } from '@mui/material';
+import { AlertTitle, Checkbox, FormControlLabel } from '@mui/material';
 import WarningIcon from '@mui/icons-material/Warning';
 
 export default function Account() {
@@ -136,7 +136,7 @@ export default function Account() {
                                     displayEmpty
                                     sx={{ height: '40px', fontSize: '0.875rem', fontFamily: '"Public Sans", sans-serif' }}
                                 >
-                                    <MenuItem value="">Select Country</MenuItem>
+                                    <MenuItem>Select Country</MenuItem>
                                 </StyledSelect>
                             </FormControl>
                         </Stack>
@@ -147,7 +147,7 @@ export default function Account() {
                                     displayEmpty
                                     sx={{ height: '40px', fontSize: '0.875rem', fontFamily: '"Public Sans", sans-serif' }}
                                 >
-                                    <MenuItem value="">Select Language</MenuItem>
+                                    <MenuItem>Select Language</MenuItem>
                                 </StyledSelect>
                             </FormControl>
                         </Stack>
@@ -161,7 +161,7 @@ export default function Account() {
                                     displayEmpty
                                     sx={{ height: '40px', fontSize: '0.875rem', fontFamily: '"Public Sans", sans-serif' }}
                                 >
-                                    <MenuItem value="">Select Timezone</MenuItem>
+                                    <MenuItem>Select Timezone</MenuItem>
                                 </StyledSelect>
                             </FormControl>
                         </Stack>
@@ -172,7 +172,7 @@ export default function Account() {
                                     displayEmpty
                                     sx={{ height: '40px', fontSize: '0.875rem', fontFamily: '"Public Sans", sans-serif' }}
                                 >
-                                    <MenuItem value="">Select Currency</MenuItem>
+                                    <MenuItem>Select Currency</MenuItem>
                                 </StyledSelect>
                             </FormControl>
                         </Stack>

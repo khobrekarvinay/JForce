@@ -402,12 +402,12 @@ function BillingContent() {
                         gap: 2
                     }}>
                         <Alert severity="warning" icon={<WarningAmberIcon />}
-                        sx={{
-                            '& .MuiAlert-message': {
-                                fontFamily: '"Public Sans", sans-serif',
-                                color: '#ffa54f' // Change text color to yellow
-                            }
-                        }} >
+                            sx={{
+                                '& .MuiAlert-message': {
+                                    fontFamily: '"Public Sans", sans-serif',
+                                    color: '#ffa54f' // Change text color to yellow
+                                }
+                            }} >
                             <Typography variant="subtitle1" sx={{ // Increase font size by using subtitle1 instead of subtitle2
                                 fontWeight: 600,
                                 mb: 0.5,
@@ -597,7 +597,7 @@ function BillingContent() {
                             <InputLabel>Country</InputLabel>
                             <FormControl fullWidth>
                                 <StyledSelect displayEmpty sx={{ height: '40px', fontSize: '0.875rem', fontFamily: '"Public Sans", sans-serif' }} >
-                                    <MenuItem value="">Select Country</MenuItem>
+                                    <MenuItem>Select Country</MenuItem>
                                     <MenuItem value="USA">USA</MenuItem>
                                     {/* Add more countries here */}
                                 </StyledSelect>
@@ -628,189 +628,190 @@ function BillingContent() {
             </Box>
             {/* Billing History Card */}
             <Card sx={{ mt: 3, boxShadow: '0px 2px 10px rgba(76, 78, 100, 0.22)' }}>
-    <CardContent>
-        <Typography 
-            variant="h6" 
-            sx={{ 
-                mb: 3,
-                fontSize: '1.25rem',
-                fontWeight: 500,
-                fontFamily: '"Public Sans", sans-serif'
-            }}
-        >
-            Billing History
-        </Typography>
-        <TableContainer>
-            <Table sx={{ minWidth: 650 }} aria-label="billing history table">
-                <TableHead>
-                    <TableRow>
-                        <TableCell 
-                            sx={{ 
-                                borderBottom: '1px solid rgba(76, 78, 100, 0.2)',
-                                py: 2,
-                                fontSize: '0.75rem',
-                                fontWeight: 600,
-                                color: 'text.secondary',
-                                fontFamily: '"Public Sans", sans-serif'
-                            }}
-                        >
-                            Invoice ID
-                        </TableCell>
-                        <TableCell 
-                            sx={{ 
-                                borderBottom: '1px solid rgba(76, 78, 100, 0.2)',
-                                py: 2,
-                                fontSize: '0.75rem',
-                                fontWeight: 600,
-                                color: 'text.secondary',
-                                fontFamily: '"Public Sans", sans-serif'
-                            }}
-                        >
-                            Client
-                        </TableCell>
-                        <TableCell 
-                            sx={{ 
-                                borderBottom: '1px solid rgba(76, 78, 100, 0.2)',
-                                py: 2,
-                                fontSize: '0.75rem',
-                                fontWeight: 600,
-                                color: 'text.secondary',
-                                fontFamily: '"Public Sans", sans-serif'
-                            }}
-                        >
-                            Software
-                        </TableCell>
-                        <TableCell 
-                            sx={{ 
-                                borderBottom: '1px solid rgba(76, 78, 100, 0.2)',
-                                py: 2,
-                                fontSize: '0.75rem',
-                                fontWeight: 600,
-                                color: 'text.secondary',
-                                fontFamily: '"Public Sans", sans-serif'
-                            }}
-                        >
-                            Total
-                        </TableCell>
-                        <TableCell 
-                            sx={{ 
-                                borderBottom: '1px solid rgba(76, 78, 100, 0.2)',
-                                py: 2,
-                                fontSize: '0.75rem',
-                                fontWeight: 600,
-                                color: 'text.secondary',
-                                fontFamily: '"Public Sans", sans-serif'
-                            }}
-                        >
-                            Issued Date
-                        </TableCell>
-                        <TableCell 
-                            sx={{ 
-                                borderBottom: '1px solid rgba(76, 78, 100, 0.2)',
-                                py: 2,
-                                fontSize: '0.75rem',
-                                fontWeight: 600,
-                                color: 'text.secondary',
-                                fontFamily: '"Public Sans", sans-serif'
-                            }}
-                        >
-                            Balance
-                        </TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {mockBillingData.map((row) => (
-                        <TableRow
-                            key={row.id}
-                            sx={{
-                                '&:nth-of-type(odd)': {
-                                    backgroundColor: 'rgba(76, 78, 100, 0.04)'
-                                },
-                                '&:hover': {
-                                    backgroundColor: 'rgba(76, 78, 100, 0.08)'
-                                }
-                            }}
-                        >
-                            <TableCell 
-                                sx={{ 
-                                    py: 2,
-                                    fontSize: '0.875rem',
-                                    fontFamily: '"Public Sans", sans-serif',
-                                    color: 'text.primary'
-                                }}
-                            >
-                                {row.id}
-                            </TableCell>
-                            <TableCell>
-                                <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                                    <Box
-                                        component="img"
-                                        src={row.image}
-                                        alt={`${row.client} avatar`}
+                <CardContent>
+                    <Typography
+                        variant="h6"
+                        sx={{
+                            mb: 3,
+                            fontSize: '1.25rem',
+                            fontWeight: 500,
+                            fontFamily: '"Public Sans", sans-serif'
+                        }}
+                    >
+                        Billing History
+                    </Typography>
+                    <TableContainer>
+                        <Table sx={{ minWidth: 650 }} aria-label="billing history table">
+                            <TableHead>
+                                <TableRow>
+                                    <TableCell
                                         sx={{
-                                            width: 40,
-                                            height: 40,
-                                            borderRadius: '50%',
-                                            mr: 2,
-                                            backgroundColor: 'primary.light'
-                                        }}
-                                    />
-                                    <Typography 
-                                        sx={{ 
-                                            fontSize: '0.875rem',
+                                            borderBottom: '1px solid rgba(76, 78, 100, 0.2)',
+                                            py: 2,
+                                            fontSize: '0.75rem',
+                                            fontWeight: 600,
+                                            color: 'text.secondary',
                                             fontFamily: '"Public Sans", sans-serif'
                                         }}
                                     >
-                                        {row.client}
-                                    </Typography>
-                                </Box>
-                            </TableCell>
-                            <TableCell 
-                                sx={{ 
-                                    fontSize: '0.875rem',
-                                    fontFamily: '"Public Sans", sans-serif',
-                                    color: 'text.secondary'
-                                }}
-                            >
-                                {row.software}
-                            </TableCell>
-                            <TableCell
-                                sx={{ 
-                                    fontSize: '0.875rem',
-                                    fontFamily: '"Public Sans", sans-serif',
-                                    color: 'text.primary'
-                                }}
-                            >
-                                {row.total}
-                            </TableCell>
-                            <TableCell
-                                sx={{ 
-                                    fontSize: '0.875rem',
-                                    fontFamily: '"Public Sans", sans-serif',
-                                    color: 'text.secondary'
-                                }}
-                            >
-                                {row.issuedDate}
-                            </TableCell>
-                            <TableCell>
-                                <Typography
-                                    sx={{
-                                        fontSize: '0.875rem',
-                                        fontFamily: '"Public Sans", sans-serif',
-                                        color: row.balance === 'Paid' ? 'success.main' : 'error.main',
-                                        fontWeight: 500
-                                    }}
-                                >
-                                    {row.balance}
-                                </Typography>
-                            </TableCell>
-                        </TableRow>
-                    ))}
-                </TableBody>
-            </Table>
-        </TableContainer>
-    </CardContent>
-</Card>        </Box >
+                                        Invoice ID
+                                    </TableCell>
+                                    <TableCell
+                                        sx={{
+                                            borderBottom: '1px solid rgba(76, 78, 100, 0.2)',
+                                            py: 2,
+                                            fontSize: '0.75rem',
+                                            fontWeight: 600,
+                                            color: 'text.secondary',
+                                            fontFamily: '"Public Sans", sans-serif'
+                                        }}
+                                    >
+                                        Client
+                                    </TableCell>
+                                    <TableCell
+                                        sx={{
+                                            borderBottom: '1px solid rgba(76, 78, 100, 0.2)',
+                                            py: 2,
+                                            fontSize: '0.75rem',
+                                            fontWeight: 600,
+                                            color: 'text.secondary',
+                                            fontFamily: '"Public Sans", sans-serif'
+                                        }}
+                                    >
+                                        Software
+                                    </TableCell>
+                                    <TableCell
+                                        sx={{
+                                            borderBottom: '1px solid rgba(76, 78, 100, 0.2)',
+                                            py: 2,
+                                            fontSize: '0.75rem',
+                                            fontWeight: 600,
+                                            color: 'text.secondary',
+                                            fontFamily: '"Public Sans", sans-serif'
+                                        }}
+                                    >
+                                        Total
+                                    </TableCell>
+                                    <TableCell
+                                        sx={{
+                                            borderBottom: '1px solid rgba(76, 78, 100, 0.2)',
+                                            py: 2,
+                                            fontSize: '0.75rem',
+                                            fontWeight: 600,
+                                            color: 'text.secondary',
+                                            fontFamily: '"Public Sans", sans-serif'
+                                        }}
+                                    >
+                                        Issued Date
+                                    </TableCell>
+                                    <TableCell
+                                        sx={{
+                                            borderBottom: '1px solid rgba(76, 78, 100, 0.2)',
+                                            py: 2,
+                                            fontSize: '0.75rem',
+                                            fontWeight: 600,
+                                            color: 'text.secondary',
+                                            fontFamily: '"Public Sans", sans-serif'
+                                        }}
+                                    >
+                                        Balance
+                                    </TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {mockBillingData.map((row) => (
+                                    <TableRow
+                                        key={row.id}
+                                        sx={{
+                                            '&:nth-of-type(odd)': {
+                                                backgroundColor: 'rgba(76, 78, 100, 0.04)'
+                                            },
+                                            '&:hover': {
+                                                backgroundColor: 'rgba(76, 78, 100, 0.08)'
+                                            }
+                                        }}
+                                    >
+                                        <TableCell
+                                            sx={{
+                                                py: 2,
+                                                fontSize: '0.875rem',
+                                                fontFamily: '"Public Sans", sans-serif',
+                                                color: 'text.primary'
+                                            }}
+                                        >
+                                            {row.id}
+                                        </TableCell>
+                                        <TableCell>
+                                            <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                                                <Box
+                                                    component="img"
+                                                    src={row.image}
+                                                    alt={`${row.client} avatar`}
+                                                    sx={{
+                                                        width: 40,
+                                                        height: 40,
+                                                        borderRadius: '50%',
+                                                        mr: 2,
+                                                        backgroundColor: 'primary.light'
+                                                    }}
+                                                />
+                                                <Typography
+                                                    sx={{
+                                                        fontSize: '0.875rem',
+                                                        fontFamily: '"Public Sans", sans-serif'
+                                                    }}
+                                                >
+                                                    {row.client}
+                                                </Typography>
+                                            </Box>
+                                        </TableCell>
+                                        <TableCell
+                                            sx={{
+                                                fontSize: '0.875rem',
+                                                fontFamily: '"Public Sans", sans-serif',
+                                                color: 'text.secondary'
+                                            }}
+                                        >
+                                            {row.software}
+                                        </TableCell>
+                                        <TableCell
+                                            sx={{
+                                                fontSize: '0.875rem',
+                                                fontFamily: '"Public Sans", sans-serif',
+                                                color: 'text.primary'
+                                            }}
+                                        >
+                                            {row.total}
+                                        </TableCell>
+                                        <TableCell
+                                            sx={{
+                                                fontSize: '0.875rem',
+                                                fontFamily: '"Public Sans", sans-serif',
+                                                color: 'text.secondary'
+                                            }}
+                                        >
+                                            {row.issuedDate}
+                                        </TableCell>
+                                        <TableCell>
+                                            <Typography
+                                                sx={{
+                                                    fontSize: '0.875rem',
+                                                    fontFamily: '"Public Sans", sans-serif',
+                                                    color: row.balance === 'Paid' ? 'success.main' : 'error.main',
+                                                    fontWeight: 500
+                                                }}
+                                            >
+                                                {row.balance}
+                                            </Typography>
+                                        </TableCell>
+                                    </TableRow>
+                                ))}
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+                </CardContent>
+            </Card>
+        </Box >
     );
 }
 

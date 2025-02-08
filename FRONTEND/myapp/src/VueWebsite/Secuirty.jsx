@@ -1,11 +1,12 @@
 import React from 'react';
-import { Typography, Box, Stack, TextField, styled, ListItem, List, ListItemIcon, ListItemText, Button, Link, MenuItem, FormControl, Select, CardContent, TableContainer, Table, TableHead, TableRow, TableBody, TableCell, Paper } from '@mui/material';
+import { Typography, Box, Stack, TextField, styled, ListItem, List, ListItemIcon, ListItemText, Button, Link, MenuItem, FormControl, Select, InputAdornment, TableContainer, Table, TableHead, TableRow, TableBody, TableCell, Paper } from '@mui/material';
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import WindowOutlinedIcon from '@mui/icons-material/WindowOutlined';
 import PhoneIphoneOutlinedIcon from '@mui/icons-material/PhoneIphoneOutlined';
 import AndroidOutlinedIcon from '@mui/icons-material/AndroidOutlined';
 import LaptopMacOutlinedIcon from '@mui/icons-material/LaptopMacOutlined';
 import ContentCopyOutlinedIcon from '@mui/icons-material/ContentCopyOutlined';
+import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined';
 
 function SecurityContent() {
 
@@ -70,7 +71,10 @@ function SecurityContent() {
         <Stack direction={{ xs: "column", sm: "row" }} spacing={2} sx={{ paddingBottom: '30px' }}>
           <Stack spacing={1} flex={1}>
             <InputLabel>Current Password</InputLabel>
-            <StyledTextField fullWidth type='password' placeholder=".................." variant="outlined" />
+            <StyledTextField fullWidth type='password' placeholder=".................." variant="outlined"
+              InputProps={{
+                endAdornment: <InputAdornment position="end"><VisibilityOffOutlinedIcon /></InputAdornment>,
+              }} />
           </Stack>
           <Stack spacing={1} flex={1}>
             {/* <InputLabel>Zip Code</InputLabel>
@@ -81,11 +85,17 @@ function SecurityContent() {
         <Stack direction={{ xs: "column", sm: "row" }} spacing={2} sx={{ paddingBottom: '20px' }}>
           <Stack spacing={1} flex={1}>
             <InputLabel>New Password</InputLabel>
-            <StyledTextField fullWidth type='password' placeholder="................" variant="outlined" />
+            <StyledTextField fullWidth type='password' placeholder=".................." variant="outlined"
+              InputProps={{
+                endAdornment: <InputAdornment position="end"><VisibilityOffOutlinedIcon /></InputAdornment>,
+              }} />
           </Stack>
           <Stack spacing={1} flex={1}>
             <InputLabel>Confirm New Password</InputLabel>
-            <StyledTextField fullWidth type='password' placeholder="................" variant="outlined" />
+            <StyledTextField fullWidth type='password' placeholder=".................." variant="outlined"
+              InputProps={{
+                endAdornment: <InputAdornment position="end"><VisibilityOffOutlinedIcon /></InputAdornment>,
+              }} />
           </Stack>
         </Stack>
 
@@ -150,8 +160,8 @@ function SecurityContent() {
               <Stack spacing={1} flex={1}>
                 <InputLabel>Choose the API key type you want to create</InputLabel>
                 <FormControl fullWidth>
-                  <StyledSelect displayEmpty sx={{ height: '40px', fontSize: '0.875rem', fontFamily: '"Public Sans", sans-serif', marginBottom: '8px' }} >
-                    <MenuItem value="">Choose Key Type</MenuItem>
+                  <StyledSelect displayEmpty  sx={{ height: '40px', fontSize: '0.875rem', fontFamily: '"Public Sans", sans-serif', marginBottom: '8px' }} >
+                    <MenuItem>Choose Key Type</MenuItem>
                   </StyledSelect>
                 </FormControl>
               </Stack>
@@ -173,7 +183,7 @@ function SecurityContent() {
 
       {/* API key list & access */}
       <Box sx={{ p: 3, maxWidth: 1200, mx: "auto", bgcolor: "white", borderRadius: 2, boxShadow: 3, marginBottom: '30px' }}>
-        
+
         <Typography variant='h5' sx={{ color: '#444050', paddingBottom: '20px' }}>API Key List & Access</Typography>
         <Typography variant='body1' sx={{ color: '#6D6B77', paddingBottom: '20px' }}>
           An API key is a simple encrypted string that identifies an application without any principal. They are useful for accessing public data anonymously, and are used to associate API requests with your project for quota and billing.

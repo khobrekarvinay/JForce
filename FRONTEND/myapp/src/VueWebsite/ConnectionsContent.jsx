@@ -6,13 +6,13 @@ import DeleteIcon from '@mui/icons-material/Delete';
 const ConnectedAccounts = [
     {
         name: 'Google',
-        icon: 'https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg',
+        icon: 'https://static-00.iconduck.com/assets.00/google-icon-2048x2048-czn3g8x8.png',
         description: 'Calendar and contacts',
         connected: true
     },
     {
         name: 'Slack',
-        icon: 'https://upload.wikimedia.org/wikipedia/commons/d/d5/Slack_icon_2019.svg',
+        icon: 'https://cdn-icons-png.flaticon.com/512/732/732245.png',
         description: 'Communication',
         connected: false
     },
@@ -24,13 +24,13 @@ const ConnectedAccounts = [
     },
     {
         name: 'Mailchimp',
-        icon: 'https://cdn-icons-png.flaticon.com/512/5968/5968879.png',
+        icon: 'https://static-00.iconduck.com/assets.00/mailchimp-icon-2048x2048-isefig92.png',
         description: 'Email marketing service',
         connected: true
     },
     {
         name: 'Asana',
-        icon: 'https://cdn.worldvectorlogo.com/logos/asana-1.svg',
+        icon: 'https://w7.pngwing.com/pngs/309/436/png-transparent-asana-circle-round-icon-popular-services-brands-vol-2-icon.png',
         description: 'Communication',
         connected: false
     }
@@ -39,13 +39,13 @@ const ConnectedAccounts = [
 const SocialAccounts = [
     {
         name: 'Facebook',
-        icon: 'https://upload.wikimedia.org/wikipedia/commons/b/b8/2021_Facebook_icon.svg',
+        icon: 'https://cdn.creazilla.com/icons/7911211/facebook-icon-lg.png',
         status: 'Not Connected',
         connected: false
     },
     {
         name: 'Twitter',
-        icon: 'https://about.twitter.com/content/dam/about-twitter/x/brand-toolkit/logo-black.png.twimg.1920.png',
+        icon: 'https://cdn2.iconfinder.com/data/icons/minimalism/512/twitter.png',
         status: '@Pixinvent',
         connected: true
     },
@@ -57,13 +57,13 @@ const SocialAccounts = [
     },
     {
         name: 'Dribbble',
-        icon: 'https://cdn.worldvectorlogo.com/logos/dribbble-icon-1.svg',
+        icon: 'https://static-00.iconduck.com/assets.00/dribbble-icon-2048x2048-biywjvn7.png',
         status: 'Not Connected',
         connected: false
     },
     {
         name: 'Behance',
-        icon: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Behance_logo.svg/1024px-Behance_logo.svg.png',
+        icon: 'https://static-00.iconduck.com/assets.00/behance-icon-2048x1289-drdjdiyf.png',
         status: 'Not Connected',
         connected: false
     }
@@ -71,13 +71,13 @@ const SocialAccounts = [
 
 function ConnectionsContent() {
     return (
-      <Box justifyContent='space-between' display='flex' sx={{ p: 3, maxWidth: 1200, mx: "auto", bgcolor: "white", borderRadius: 2, boxShadow: 3, marginBottom: '30px' }}>
-            <Box sx={{ maxWidth:600 }}>
+        <Box justifyContent='space-around' display='flex' sx={{ p: 3, maxWidth: 1200, mx: "auto", bgcolor: "white", borderRadius: 2, boxShadow: 3, marginBottom: '30px' }}>
+            <Box sx={{  }}>
                 <CardContent>
-                    <Typography variant="h6" gutterBottom>
+                    <Typography variant="h6" sx={{ color: '#444050' }}>
                         Connected Accounts
                     </Typography>
-                    <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
+                    <Typography variant="body2" sx={{ mb: 3, color: '#8D8A94' }}>
                         Display content from your connected accounts on your site
                     </Typography>
 
@@ -91,7 +91,7 @@ function ConnectionsContent() {
                                         <Typography variant="body2" color="text.secondary"> {account.description} </Typography>
                                     </Box>
                                 </Box>
-                                <Switch checked={account.connected} />
+                                <Switch />
                             </Box>
                             {index < ConnectedAccounts.length - 1 && <Divider />}
                         </Box>
@@ -99,12 +99,12 @@ function ConnectionsContent() {
                 </CardContent>
             </Box>
 
-            <Box sx={{ maxWidth:600 }}>
+            <Box sx={{  }}>
                 <CardContent>
-                    <Typography variant="h6" gutterBottom>
+                    <Typography variant="h6" sx={{ color: '#444050' }}>
                         Social Accounts
                     </Typography>
-                    <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
+                    <Typography variant="body2" sx={{ mb: 3, color: '#8D8A94' }}>
                         Display content from social accounts on your site
                     </Typography>
 

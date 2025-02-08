@@ -17,6 +17,8 @@ import MonetizationOnOutlinedIcon from '@mui/icons-material/MonetizationOnOutlin
 import NotificationsOutlinedIcon from '@mui/icons-material/NotificationsOutlined';
 import PeopleOutlinedIcon from '@mui/icons-material/PeopleOutlined';
 
+import Footer from './Footer.jsx';
+
 // Styled search container
 const SearchContainer = styled(Box)(({ theme }) => ({
     display: 'flex',
@@ -222,7 +224,7 @@ function AccountPage() {
                     </TabPanel>
                 </Box>
             </Box>
-            {/* <Footer /> */}
+            <Footer />
         </Box>
     );
 }
