@@ -32,6 +32,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import Alert from '@mui/material/Alert';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import WarningAmberIcon from '@mui/icons-material/WarningAmber';
 
 const CenteredBox = styled(Box)({
     display: 'flex',
@@ -257,59 +258,227 @@ function BillingContent() {
 
     return (
         <Box>
-            {/* Current Plan Section */}
-            <Box sx={{ p: 3, maxWidth: 1400, width: '100%', mx: "auto", bgcolor: "white", borderRadius: 2, boxShadow: 3 }}>
-                <Card sx={{ mb: 3, display: 'flex', gap: 0.5 }}>
-                    <CardContent sx={{ flex: 1 }}>
-                        <Typography variant="h6" sx={{ fontSize: '1.25rem', fontWeight: 500, mb: 1, fontFamily: 'Public Sans' }}>
+            {/* Current Plan Section -----------------------------------------------------------*/}
+            <Box sx={{ p: 3, mb: 4, maxWidth: 1400, width: '100%', mx: "auto", bgcolor: "white", borderRadius: 1, boxShadow: '0px 2px 10px rgba(76, 78, 100, 0.22)' }}>
+                <Box sx={{
+                    display: 'flex',
+                    gap: 4,
+                    flexDirection: { xs: 'column', md: 'row' }
+                }}>
+                    {/* Left Content */}
+                    <Box sx={{ flex: 1 }}>
+                        <Typography
+                            variant="h6"
+                            sx={{
+                                fontSize: '1.25rem',
+                                fontWeight: 500,
+                                mb: 3,
+                                fontFamily: '"Public Sans", sans-serif'
+                            }}
+                        >
                             Current Plan
                         </Typography>
-                        <Typography variant="subtitle1" sx={{ color: 'text.primary', fontWeight: 600, fontSize: '1.25rem', fontFamily: 'Public Sans' }}>
+                        <Typography
+                            variant="h6"
+                            sx={{
+                                color: 'text.primary',
+                                fontWeight: 500,
+                                fontSize: '1rem',
+                                mb: 1,
+                                fontFamily: '"Public Sans", sans-serif'
+                            }}
+                        >
                             Your Current Plan is Basic
                         </Typography>
-                        <Typography variant="body2" color="text.secondary">
+                        <Typography
+                            variant="body2"
+                            sx={{
+                                color: 'text.secondary',
+                                mb: 2,
+                                fontSize: '0.875rem',
+                                fontFamily: '"Public Sans", sans-serif'
+                            }}
+                        >
                             A simple start for everyone
                         </Typography>
-                        <Typography variant="body2" color="text.secondary" sx={{ mt: 2 }}>
+
+                        <Typography
+                            variant="body2"
+                            sx={{
+                                color: 'text.secondary',
+                                mb: 0.5,
+                                fontSize: '0.875rem',
+                                fontFamily: '"Public Sans", sans-serif'
+                            }}
+                        >
                             Active until Dec 09, 2021
                         </Typography>
-                        <Typography variant="body2" color="text.secondary">
+                        <Typography
+                            variant="body2"
+                            sx={{
+                                color: 'text.secondary',
+                                mb: 2,
+                                fontSize: '0.875rem',
+                                fontFamily: '"Public Sans", sans-serif'
+                            }}
+                        >
                             We will send you a notification upon Subscription expiration
                         </Typography>
-                        <Typography variant="h6" sx={{ mt: 2, fontSize: '1.25rem', fontFamily: 'Public Sans' }}>
-                            $199 Per Month{' '}
-                            <Box component="span" sx={{ color: 'primary.main', fontWeight: 'bold', backgroundColor: '#e6d8ff', borderRadius: '4px', padding: '2px 4px', fontFamily: 'Public Sans' }}>
+
+                        <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+                            <Typography
+                                sx={{
+                                    fontSize: '1.25rem',
+                                    fontWeight: 500,
+                                    mr: 1,
+                                    fontFamily: '"Public Sans", sans-serif'
+                                }}
+                            >
+                                $199 Per Month
+                            </Typography>
+                            <Box
+                                component="span"
+                                sx={{
+                                    bgcolor: '#e8e7fd',
+                                    color: '#7367f0',
+                                    px: 1,
+                                    py: 0.5,
+                                    borderRadius: 1,
+                                    fontSize: '0.8125rem',
+                                    fontWeight: 500,
+                                    fontFamily: '"Public Sans", sans-serif'
+                                }}
+                            >
                                 Popular
                             </Box>
-                        </Typography>
-                        <Typography variant="body2" color="text.secondary">
+                        </Box>
+
+                        <Typography
+                            variant="body2"
+                            sx={{
+                                color: 'text.secondary',
+                                mb: 3,
+                                fontSize: '0.875rem',
+                                fontFamily: '"Public Sans", sans-serif'
+                            }}
+                        >
                             Standard plan for small to medium businesses
                         </Typography>
-                        <Box sx={{ mt: 2, display: 'flex', gap: 2 }}>
-                            <Button variant="contained">Upgrade Plan</Button>
-                            <Button variant="contained" color="error" sx={{ bgcolor: '#ffe2e3', color: 'error.main' }}>Cancel Subscription</Button>
+
+                        <Box sx={{ display: 'flex', gap: 2 }}>
+                            <Button
+                                variant="contained"
+                                sx={{
+                                    bgcolor: '#7367f0',
+                                    '&:hover': { bgcolor: '#6054e6' },
+                                    textTransform: 'none',
+                                    fontFamily: '"Public Sans", sans-serif'
+                                }}
+                            >
+                                Upgrade Plan
+                            </Button>
+                            <Button
+                                variant="contained"
+                                sx={{
+                                    bgcolor: '#ef5350',
+                                    color: '#fff',
+                                    '&:hover': { bgcolor: '#ffe2e3' },
+                                    textTransform: 'none',
+                                    fontFamily: '"Public Sans", sans-serif'
+                                }}
+                            >
+                                Cancel Subscription
+                            </Button>
                         </Box>
-                    </CardContent>
-                    <Box sx={{ ml: 0, display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 1, minWidth: 250 }}>
-                        <Alert severity="warning" sx={{ width: '100%' }}>
-                            <Box>We need your attention! </Box>
-                            <Box>Your plan requires update. </Box>
+                    </Box>
+
+                    {/* Right Content */}
+                    <Box sx={{
+                        width: { xs: '100%', md: '700px' },
+                        p: 6,
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'center',
+                        gap: 2
+                    }}>
+                        <Alert severity="warning" icon={<WarningAmberIcon />}
+                        sx={{
+                            '& .MuiAlert-message': {
+                                fontFamily: '"Public Sans", sans-serif',
+                                color: '#ffa54f' // Change text color to yellow
+                            }
+                        }} >
+                            <Typography variant="subtitle1" sx={{ // Increase font size by using subtitle1 instead of subtitle2
+                                fontWeight: 600,
+                                mb: 0.5,
+                                fontFamily: '"Public Sans", sans-serif'
+                            }} >
+                                We need your attention!
+                            </Typography>
+                            <Typography variant="body1" sx={{ // Increase font size by using body1 instead of body2
+                                fontFamily: '"Public Sans", sans-serif'
+                            }} >
+                                Your plan requires update
+                            </Typography>
                         </Alert>
                         <Box sx={{ width: '100%' }}>
-                            <Typography variant="body2" color="text.secondary" sx={{ mb: 1, display: 'flex', justifyContent: 'space-between' }}>
-                                Days
-                                <Typography variant="body2" color="text.secondary">12 of 30 days</Typography>
-                            </Typography>
-                            <LinearProgress variant="determinate" value={40} sx={{ height: 8, borderRadius: 4, backgroundColor: 'action.hover', '& .MuiLinearProgress-bar': { backgroundColor: 'primary.main', borderRadius: 4 } }} />
-                            <Typography variant="caption" sx={{ color: '#ffd600' }}>
+                            <Box sx={{
+                                display: 'flex',
+                                justifyContent: 'space-between',
+                                mb: 1
+                            }}>
+                                <Typography
+                                    variant="body2"
+                                    sx={{
+                                        color: 'text.secondary',
+                                        fontFamily: '"Public Sans", sans-serif'
+                                    }}
+                                >
+                                    Days
+                                </Typography>
+                                <Typography
+                                    variant="body2"
+                                    sx={{
+                                        color: 'text.secondary',
+                                        fontFamily: '"Public Sans", sans-serif'
+                                    }}
+                                >
+                                    12 of 30 Days
+                                </Typography>
+                            </Box>
+
+                            <LinearProgress
+                                variant="determinate"
+                                value={40}
+                                sx={{
+                                    height: 8,
+                                    borderRadius: 4,
+                                    bgcolor: '#ebeef0',
+                                    '& .MuiLinearProgress-bar': {
+                                        bgcolor: '#7367f0',
+                                        borderRadius: 4
+                                    }
+                                }}
+                            />
+
+                            <Typography
+                                variant="caption"
+
+                                sx={{
+                                    color: 'text.secondary',
+                                    display: 'block',
+                                    mt: 1,
+                                    fontFamily: '"Public Sans", sans-serif'
+                                }}
+                            >
                                 18 days remaining until your plan requires update
                             </Typography>
                         </Box>
                     </Box>
-                </Card>
+                </Box>
             </Box>
             {/* Payment Methods Section ---------------------------------------- */}
-            <Card>
+            <Box>
                 <CardContent>
                     <Box sx={{ p: 3, maxWidth: 1400, width: '100%', mx: "auto", bgcolor: "white", borderRadius: 2, boxShadow: 3 }}>
                         <Typography variant="h6" gutterBottom>Payment Methods</Typography>
@@ -322,7 +491,7 @@ function BillingContent() {
                                     </RadioGroup>
                                 </FormControl>
                                 <InputLabel>Card Number</InputLabel>
-                                <StyledTextField fullWidth placeholder="** ** 9856" variant="outlined" sx={{ textTransform: 'none' }} />
+                                <StyledTextField fullWidth placeholder="1356 3215 6548 9856" variant="outlined" sx={{ textTransform: 'none' }} />
                                 <Stack direction={{ xs: 'column', sm: 'row' }} spacing={4}>
                                     <Stack spacing={1} flex={1}>
                                         <InputLabel>Name</InputLabel>
@@ -394,7 +563,7 @@ function BillingContent() {
                         </Box>
                     </Box>
                 </CardContent>
-            </Card>
+            </Box>
             {/* Billing Address Card -------------------------------------------------------------------------*/}
             <Box sx={{ p: 3, maxWidth: 1400, width: '100%', mx: "auto", bgcolor: "white", borderRadius: 2, boxShadow: 3 }}>
                 <Typography variant="h6" gutterBottom sx={{ mb: 2 }}>Billing Address</Typography>
@@ -458,48 +627,190 @@ function BillingContent() {
                 </Stack>
             </Box>
             {/* Billing History Card */}
-            <Card sx={{ mt: 3 }}>
-                <CardContent>
-                    <Typography variant="h6" gutterBottom>Billing History</Typography>
-                    <TableContainer>
-                        <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                            <TableHead>
-                                <TableRow>
-                                    <TableCell sx={{ width: '10%' }}>Invoice ID</TableCell>
-                                    <TableCell sx={{ width: '20%' }}>Client</TableCell>
-                                    <TableCell sx={{ width: '20%' }}>Software</TableCell>
-                                    <TableCell sx={{ width: '20%' }}>Total</TableCell>
-                                    <TableCell sx={{ width: '20%' }}>Issued Date</TableCell>
-                                    <TableCell sx={{ width: '20%' }}>Balance</TableCell>
-                                </TableRow>
-                            </TableHead>
-                            <TableBody>
-                                {mockBillingData.map((row) => (
-                                    <StyledTableRow key={(row.id)}>
-                                        <TableCell component="th" scope="row">{(row.id)}</TableCell>
-                                        <TableCell>
-                                            <ImageWrapper>
-                                                <CenteredBox width={40} height={40} borderRadius="50%" bgcolor="secondary.light" color="white" marginRight={2} component="img" src={row.image} alt="clientImage" />
-                                                <Typography>{row.client}</Typography>
-                                                <Typography variant="body2" color="text.secondary">{row.role}</Typography>
-                                            </ImageWrapper>
-                                        </TableCell>
-                                        <TableCell>{row.software}</TableCell>
-                                        <TableCell>{row.total}</TableCell>
-                                        <TableCell>{row.issuedDate}</TableCell>
-                                        <TableCell>
-                                            <Typography variant="body2" color={row.balance === 'Paid' ? 'success.main' : 'error.main'}>
-                                                {row.balance}
-                                            </Typography>
-                                        </TableCell>
-                                    </StyledTableRow> // added closing tag here
-                                ))}
-                            </TableBody>
-                        </Table>
-                    </TableContainer>
-                </CardContent>
-            </Card>
-        </Box >
+            <Card sx={{ mt: 3, boxShadow: '0px 2px 10px rgba(76, 78, 100, 0.22)' }}>
+    <CardContent>
+        <Typography 
+            variant="h6" 
+            sx={{ 
+                mb: 3,
+                fontSize: '1.25rem',
+                fontWeight: 500,
+                fontFamily: '"Public Sans", sans-serif'
+            }}
+        >
+            Billing History
+        </Typography>
+        <TableContainer>
+            <Table sx={{ minWidth: 650 }} aria-label="billing history table">
+                <TableHead>
+                    <TableRow>
+                        <TableCell 
+                            sx={{ 
+                                borderBottom: '1px solid rgba(76, 78, 100, 0.2)',
+                                py: 2,
+                                fontSize: '0.75rem',
+                                fontWeight: 600,
+                                color: 'text.secondary',
+                                fontFamily: '"Public Sans", sans-serif'
+                            }}
+                        >
+                            Invoice ID
+                        </TableCell>
+                        <TableCell 
+                            sx={{ 
+                                borderBottom: '1px solid rgba(76, 78, 100, 0.2)',
+                                py: 2,
+                                fontSize: '0.75rem',
+                                fontWeight: 600,
+                                color: 'text.secondary',
+                                fontFamily: '"Public Sans", sans-serif'
+                            }}
+                        >
+                            Client
+                        </TableCell>
+                        <TableCell 
+                            sx={{ 
+                                borderBottom: '1px solid rgba(76, 78, 100, 0.2)',
+                                py: 2,
+                                fontSize: '0.75rem',
+                                fontWeight: 600,
+                                color: 'text.secondary',
+                                fontFamily: '"Public Sans", sans-serif'
+                            }}
+                        >
+                            Software
+                        </TableCell>
+                        <TableCell 
+                            sx={{ 
+                                borderBottom: '1px solid rgba(76, 78, 100, 0.2)',
+                                py: 2,
+                                fontSize: '0.75rem',
+                                fontWeight: 600,
+                                color: 'text.secondary',
+                                fontFamily: '"Public Sans", sans-serif'
+                            }}
+                        >
+                            Total
+                        </TableCell>
+                        <TableCell 
+                            sx={{ 
+                                borderBottom: '1px solid rgba(76, 78, 100, 0.2)',
+                                py: 2,
+                                fontSize: '0.75rem',
+                                fontWeight: 600,
+                                color: 'text.secondary',
+                                fontFamily: '"Public Sans", sans-serif'
+                            }}
+                        >
+                            Issued Date
+                        </TableCell>
+                        <TableCell 
+                            sx={{ 
+                                borderBottom: '1px solid rgba(76, 78, 100, 0.2)',
+                                py: 2,
+                                fontSize: '0.75rem',
+                                fontWeight: 600,
+                                color: 'text.secondary',
+                                fontFamily: '"Public Sans", sans-serif'
+                            }}
+                        >
+                            Balance
+                        </TableCell>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
+                    {mockBillingData.map((row) => (
+                        <TableRow
+                            key={row.id}
+                            sx={{
+                                '&:nth-of-type(odd)': {
+                                    backgroundColor: 'rgba(76, 78, 100, 0.04)'
+                                },
+                                '&:hover': {
+                                    backgroundColor: 'rgba(76, 78, 100, 0.08)'
+                                }
+                            }}
+                        >
+                            <TableCell 
+                                sx={{ 
+                                    py: 2,
+                                    fontSize: '0.875rem',
+                                    fontFamily: '"Public Sans", sans-serif',
+                                    color: 'text.primary'
+                                }}
+                            >
+                                {row.id}
+                            </TableCell>
+                            <TableCell>
+                                <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                                    <Box
+                                        component="img"
+                                        src={row.image}
+                                        alt={`${row.client} avatar`}
+                                        sx={{
+                                            width: 40,
+                                            height: 40,
+                                            borderRadius: '50%',
+                                            mr: 2,
+                                            backgroundColor: 'primary.light'
+                                        }}
+                                    />
+                                    <Typography 
+                                        sx={{ 
+                                            fontSize: '0.875rem',
+                                            fontFamily: '"Public Sans", sans-serif'
+                                        }}
+                                    >
+                                        {row.client}
+                                    </Typography>
+                                </Box>
+                            </TableCell>
+                            <TableCell 
+                                sx={{ 
+                                    fontSize: '0.875rem',
+                                    fontFamily: '"Public Sans", sans-serif',
+                                    color: 'text.secondary'
+                                }}
+                            >
+                                {row.software}
+                            </TableCell>
+                            <TableCell
+                                sx={{ 
+                                    fontSize: '0.875rem',
+                                    fontFamily: '"Public Sans", sans-serif',
+                                    color: 'text.primary'
+                                }}
+                            >
+                                {row.total}
+                            </TableCell>
+                            <TableCell
+                                sx={{ 
+                                    fontSize: '0.875rem',
+                                    fontFamily: '"Public Sans", sans-serif',
+                                    color: 'text.secondary'
+                                }}
+                            >
+                                {row.issuedDate}
+                            </TableCell>
+                            <TableCell>
+                                <Typography
+                                    sx={{
+                                        fontSize: '0.875rem',
+                                        fontFamily: '"Public Sans", sans-serif',
+                                        color: row.balance === 'Paid' ? 'success.main' : 'error.main',
+                                        fontWeight: 500
+                                    }}
+                                >
+                                    {row.balance}
+                                </Typography>
+                            </TableCell>
+                        </TableRow>
+                    ))}
+                </TableBody>
+            </Table>
+        </TableContainer>
+    </CardContent>
+</Card>        </Box >
     );
 }
 
