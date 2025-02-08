@@ -94,7 +94,7 @@ function AccountPage() {
                     </TabPanel>
                 </Box>
             </Box>
-            <Footer />
+            {/* <Footer /> */}
         </Box>
     );
 }

@@ -1,14 +1,5 @@
 import React from 'react';
-import {
-    Box,
-    Typography,
-    Card,
-    CardContent,
-    Switch,
-    IconButton,
-    Grid,
-    Divider
-} from '@mui/material';
+import { Box, Typography, Card, CardContent, Switch, IconButton, Grid, Divider } from '@mui/material';
 import LinkIcon from '@mui/icons-material/Link';
 import DeleteIcon from '@mui/icons-material/Delete';
 
@@ -80,8 +71,8 @@ const SocialAccounts = [
 
 function ConnectionsContent() {
     return (
-        <Box sx={{ p: 3 }}>
-            <Card sx={{ mb: 4 }}>
+      <Box justifyContent='space-between' display='flex' sx={{ p: 3, maxWidth: 1200, mx: "auto", bgcolor: "white", borderRadius: 2, boxShadow: 3, marginBottom: '30px' }}>
+            <Box sx={{ maxWidth:600 }}>
                 <CardContent>
                     <Typography variant="h6" gutterBottom>
                         Connected Accounts
@@ -92,30 +83,12 @@ function ConnectionsContent() {
 
                     {ConnectedAccounts.map((account, index) => (
                         <Box key={account.name}>
-                            <Box sx={{ 
-                                display: 'flex', 
-                                alignItems: 'center', 
-                                justifyContent: 'space-between',
-                                py: 2 
-                            }}>
+                            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', py: 2 }}>
                                 <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                                    <Box
-                                        component="img"
-                                        src={account.icon}
-                                        sx={{
-                                            width: 30,
-                                            height: 30,
-                                            mr: 2
-                                        }}
-                                        alt={account.name}
-                                    />
+                                    <Box component="img" src={account.icon} sx={{ width: 30, height: 30, mr: 2 }} alt={account.name} />
                                     <Box>
-                                        <Typography variant="subtitle2">
-                                            {account.name}
-                                        </Typography>
-                                        <Typography variant="body2" color="text.secondary">
-                                            {account.description}
-                                        </Typography>
+                                        <Typography variant="subtitle2"> {account.name} </Typography>
+                                        <Typography variant="body2" color="text.secondary"> {account.description} </Typography>
                                     </Box>
                                 </Box>
                                 <Switch checked={account.connected} />
@@ -124,9 +97,9 @@ function ConnectionsContent() {
                         </Box>
                     ))}
                 </CardContent>
-            </Card>
+            </Box>
 
-            <Card>
+            <Box sx={{ maxWidth:600 }}>
                 <CardContent>
                     <Typography variant="h6" gutterBottom>
                         Social Accounts
@@ -137,59 +110,21 @@ function ConnectionsContent() {
 
                     {SocialAccounts.map((account, index) => (
                         <Box key={account.name}>
-                            <Box sx={{ 
-                                display: 'flex', 
-                                alignItems: 'center', 
-                                justifyContent: 'space-between',
-                                py: 2 
-                            }}>
+                            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', py: 2 }}>
                                 <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                                    <Box
-                                        component="img"
-                                        src={account.icon}
-                                        sx={{
-                                            width: 30,
-                                            height: 30,
-                                            mr: 2
-                                        }}
-                                        alt={account.name}
-                                    />
+                                    <Box component="img" src={account.icon} sx={{ width: 30, height: 30, mr: 2 }} alt={account.name} />
                                     <Box>
-                                        <Typography variant="subtitle2">
-                                            {account.name}
-                                        </Typography>
-                                        <Typography variant="body2" color="text.secondary">
-                                            {account.status}
-                                        </Typography>
+                                        <Typography variant="subtitle2"> {account.name} </Typography>
+                                        <Typography variant="body2" color="text.secondary"> {account.status} </Typography>
                                     </Box>
                                 </Box>
                                 <Box>
                                     {account.connected ? (
-                                        <IconButton 
-                                            size="small" 
-                                            sx={{ 
-                                                bgcolor: 'error.lighter',
-                                                color: 'error.main',
-                                                mr: 1,
-                                                '&:hover': {
-                                                    bgcolor: 'error.light'
-                                                }
-                                            }}
-                                        >
+                                        <IconButton size="small" sx={{ bgcolor: 'error.lighter', color: 'error.main', mr: 1, '&:hover': { bgcolor: 'error.light' } }} >
                                             <DeleteIcon fontSize="small" />
                                         </IconButton>
                                     ) : (
-                                        <IconButton 
-                                            size="small" 
-                                            sx={{ 
-                                                bgcolor: 'grey.100',
-                                                color: 'grey.600',
-                                                mr: 1,
-                                                '&:hover': {
-                                                    bgcolor: 'grey.200'
-                                                }
-                                            }}
-                                        >
+                                        <IconButton size="small" sx={{ bgcolor: 'grey.100', color: 'grey.600', mr: 1, '&:hover': { bgcolor: 'grey.200' } }} >
                                             <LinkIcon fontSize="small" />
                                         </IconButton>
                                     )}
@@ -199,7 +134,7 @@ function ConnectionsContent() {
                         </Box>
                     ))}
                 </CardContent>
-            </Card>
+            </Box>
         </Box>
     );
 }
