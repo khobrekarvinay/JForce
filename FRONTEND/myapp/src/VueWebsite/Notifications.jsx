@@ -1,22 +1,5 @@
 import React, { useState } from 'react';
-import {
-  Box,
-  Typography,
-  Card,
-  CardContent,
-  Button,
-  Checkbox,
-  FormControl,
-  Select,
-  MenuItem,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Link
-} from '@mui/material';
+import { Box, Typography, Card, CardContent, Button, Checkbox, FormControl, Select, MenuItem, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
 
 const NotificationsContent = () => {
   const [notificationTime, setNotificationTime] = useState('online');
@@ -30,7 +13,6 @@ const NotificationsContent = () => {
 
   return (
     <Box sx={{ p: 3, maxWidth: 1400, mx: 'auto' }}>
-
 
       <Card sx={{ boxShadow: '0px 2px 10px rgba(76, 78, 100, 0.22)' }}>
         <CardContent>
@@ -128,13 +110,7 @@ const NotificationsContent = () => {
               <TableBody>
                 {notifications.map((notification, index) => (
                   <TableRow
-                    key={index}
-                    sx={{
-                      '&:nth-of-type(odd)': {
-                        backgroundColor: 'rgba(76, 78, 100, 0.04)'
-                      }
-                    }}
-                  >
+                    key={index}>
                     <TableCell
                       sx={{
                         fontSize: '0.875rem',
@@ -145,7 +121,7 @@ const NotificationsContent = () => {
                     </TableCell>
                     <TableCell align="center">
                       <Checkbox
-                        checked={notification.email}
+                        // checked={notification.email}
                         sx={{
                           color: 'rgba(76, 78, 100, 0.68)',
                           '&.Mui-checked': {
@@ -156,7 +132,7 @@ const NotificationsContent = () => {
                     </TableCell>
                     <TableCell align="center">
                       <Checkbox
-                        checked={notification.browser}
+                        // checked={notification.browser}
                         sx={{
                           color: 'rgba(76, 78, 100, 0.68)',
                           '&.Mui-checked': {
@@ -167,7 +143,7 @@ const NotificationsContent = () => {
                     </TableCell>
                     <TableCell align="center">
                       <Checkbox
-                        checked={notification.app}
+                        // checked={notification.app}
                         sx={{
                           color: 'rgba(76, 78, 100, 0.68)',
                           '&.Mui-checked': {

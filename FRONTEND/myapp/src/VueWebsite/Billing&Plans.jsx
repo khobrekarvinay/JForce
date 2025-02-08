@@ -288,7 +288,7 @@ function BillingContent() {
                                 fontSize: '1.25rem',
                                 fontWeight: 500,
                                 mb: 3,
-                                fontFamily: '"Public Sans", sans-serif'
+                                fontFamily: '"Public Sans", sans-serif', color:'#444050'
                             }}
                         >
                             Current Plan
@@ -296,7 +296,7 @@ function BillingContent() {
                         <Typography
                             variant="h6"
                             sx={{
-                                color: 'text.primary',
+                                color: '#444050',
                                 fontWeight: 500,
                                 fontSize: '1rem',
                                 mb: 1,
@@ -308,7 +308,7 @@ function BillingContent() {
                         <Typography
                             variant="body2"
                             sx={{
-                                color: 'text.secondary',
+                                color: '#6D6B77',
                                 mb: 2,
                                 fontSize: '0.875rem',
                                 fontFamily: '"Public Sans", sans-serif'
@@ -318,11 +318,11 @@ function BillingContent() {
                         </Typography>
 
                         <Typography
-                            variant="body2"
+                            variant="h6"
                             sx={{
-                                color: 'text.secondary',
+                                color: '#444050',
+                                fontSize: '1rem',
                                 mb: 0.5,
-                                fontSize: '0.875rem',
                                 fontFamily: '"Public Sans", sans-serif'
                             }}
                         >
@@ -331,7 +331,7 @@ function BillingContent() {
                         <Typography
                             variant="body2"
                             sx={{
-                                color: 'text.secondary',
+                                color: '#6D6B77',
                                 mb: 2,
                                 fontSize: '0.875rem',
                                 fontFamily: '"Public Sans", sans-serif'
@@ -341,12 +341,12 @@ function BillingContent() {
                         </Typography>
 
                         <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-                            <Typography
+                            <Typography variant='h6'
                                 sx={{
-                                    fontSize: '1.25rem',
                                     fontWeight: 500,
+                                    fontSize: '1rem',
                                     mr: 1,
-                                    fontFamily: '"Public Sans", sans-serif'
+                                    fontFamily: '"Public Sans", sans-serif', color:'#444050'
                                 }}
                             >
                                 $199 Per Month
@@ -409,7 +409,7 @@ function BillingContent() {
 
                     {/* Right Content */}
                     <Box sx={{
-                        width: { xs: '100%', md: '700px' },
+                        width: { xs: '100%', md: '50%' },
                         p: 6,
                         display: 'flex',
                         flexDirection: 'column',
@@ -496,13 +496,13 @@ function BillingContent() {
             <Box>
                 <CardContent>
                     <Box sx={{ p: 3, maxWidth: 1400, width: '100%', mx: "auto", bgcolor: "white", borderRadius: 2, boxShadow: 3 }}>
-                        <Typography variant="h6" gutterBottom>Payment Methods</Typography>
+                        <Typography variant="h6" sx={{color:'#444050'}} gutterBottom>Payment Methods</Typography>
                         <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
                             <Stack spacing={1} flex={1}>
                                 <FormControl>
-                                    <RadioGroup row>
+                                    <RadioGroup row sx={{color:'#444050'}}>
                                         <FormControlLabel value="credit" control={<Radio />} label="Credit/Debit Card" />
-                                        <FormControlLabel value="paypal" control={<Radio />} label="Paypal" />
+                                        <FormControlLabel value="paypal" control={<Radio />} label="Paypal account" />
                                     </RadioGroup>
                                 </FormControl>
                                 <InputLabel>Card Number</InputLabel>
@@ -521,7 +521,7 @@ function BillingContent() {
                                         <StyledTextField fullWidth placeholder="654" variant="outlined" sx={{ textTransform: 'none' }} />
                                     </Stack>
                                 </Stack>
-                                <FormControlLabel control={<Switch sx={{ '& .MuiSwitch-thumb': { backgroundColor: '#7367f0' }, '& .MuiSwitch-switchBase': { backgroundColor: '#EBEBED' } }} />} label="Save card for future billing?" />
+                                <FormControlLabel sx={{color:'#444050'}} control={<Switch />} label="Save card for future billing?" />
                             </Stack>
 
 
@@ -540,11 +540,11 @@ function BillingContent() {
                                     </Box>
                                     {/* Second line: name */}
                                     <Box sx={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center', marginTop: 1 }}>
-                                        <Typography sx={{ fontSize: 15, color: 'text.secondary', fontWeight: 'bold' }}>Tom McBride</Typography>
+                                        <Typography sx={{ fontSize: 15, color: '#444050', fontWeight: 'bold' }}>Tom McBride</Typography>
                                     </Box>
                                     {/* Third line: card number & expiry */}
                                     <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 1 }}>
-                                        <Typography variant="body2" color="text.secondary">_* ** 9856</Typography>
+                                        <Typography variant="body2" sx={{color:'#6D6B77'}}>_* ** 9856</Typography>
                                         <Typography variant="caption" color="text.secondary">Card expires at 12/26</Typography>
                                     </Box>
                                 </Box>
@@ -562,7 +562,7 @@ function BillingContent() {
                                     {/* Second line: name */}
                                     <Box sx={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center', marginTop: 1 }}>
 
-                                        <Typography sx={{ fontSize: 15, color: 'text.secondary', fontWeight: 'bold' }}>Mildred Wagner</Typography>
+                                        <Typography sx={{ fontSize: 15, color: '#444050', fontWeight: 'bold' }}>Mildred Wagner</Typography>
                                     </Box>
                                     {/* Third line: card number and expiry */}
                                     <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 1 }}>
@@ -572,10 +572,10 @@ function BillingContent() {
                                 </Box>
                             </Stack>
                         </Stack>
-                        <Box sx={{ mt: 2, display: 'flex', gap: 1 }}>
-                            <Button variant="contained" color="primary" sx={{ bgcolor: '#6c5ce7' }}>Save Changes</Button>
-                            <Button variant="contained" color="error" sx={{ bgcolor: '#9c9ea8' }}>Cancel</Button>
-                        </Box>
+                        <Stack direction="row" gap={2}>
+                            <Button variant="contained" sx={{ textTransform: "none", backgroundColor: '#7367f0' }}>Save Changes</Button>
+                            <Button sx={{ textTransform: "none", backgroundColor: '#EBEBED' }}>Cancle</Button>
+                        </Stack>
                     </Box>
                 </CardContent>
             </Box>
@@ -612,7 +612,7 @@ function BillingContent() {
                             <InputLabel>Country</InputLabel>
                             <FormControl fullWidth>
                                 <StyledSelect displayEmpty sx={{ height: '40px', fontSize: '0.875rem', fontFamily: '"Public Sans", sans-serif' }} >
-                                    <MenuItem value="">Select Country</MenuItem>
+                                    <MenuItem>Select Country</MenuItem>
                                     <MenuItem value="USA">USA</MenuItem>
                                     {/* Add more countries here */}
                                 </StyledSelect>
@@ -637,7 +637,7 @@ function BillingContent() {
                     </Stack>
                     <Stack direction="row" gap={2}>
                         <Button variant="contained" sx={{ textTransform: "none", backgroundColor: '#7367f0' }}>Save Changes</Button>
-                        <Button variant="outlined" sx={{ textTransform: "none", backgroundColor: '#EBEBED' }}>Discard</Button>
+                        <Button sx={{ textTransform: "none", backgroundColor: '#EBEBED' }}>Discard</Button>
                     </Stack>
                 </Stack>
             </Box>
@@ -701,7 +701,7 @@ function BillingContent() {
                                             {row.issuedDate}
                                         </TableCell>
                                         <TableCell>
-                                            <Typography sx={{ fontSize: '0.875rem', fontFamily: '"Public Sans", sans-serif', color: row.balance === 'Paid' ? 'success.main' : 'error.main', fontWeight: 500 }} >
+                                            <Typography sx={{ fontSize: '0.875rem', fontFamily: '"Public Sans", sans-serif', textAlign: 'center', color: row.balance === 'Paid' ? '#28C76F' : 'error.main', borderRadius: '5px', backgroundColor: row.balance === 'Paid' ? '#DDF6E8' : 'none', fontWeight: 500 }} >
                                                 {row.balance}
                                             </Typography>
                                         </TableCell>
@@ -710,7 +710,7 @@ function BillingContent() {
                                                 <Button variant="outlined" startIcon={<VisibilityIcon />} sx={{ border: 'none' }} />
                                                 <Button variant="outlined" startIcon={<DeleteIcon />} sx={{ border: 'none' }} />
                                                 <Button variant="outlined" startIcon={<MoreVertIcon />} sx={{ border: 'none' }} />
-                                            </Stack> 
+                                            </Stack>
                                         </TableCell>
                                     </TableRow>
                                 ))}
