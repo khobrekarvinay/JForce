@@ -206,7 +206,7 @@ const NotificationsContent = () => {
                     borderColor: 'rgba(76, 78, 100, 0.22)'
                   },
                   '&:hover .MuiOutlinedInput-notchedOutline': {
-                    borderColor: 'rgba(76, 78, 100, 0.32)'
+                    borderColor: 'rgba(76, 78, 100, 0.32)' 
                   },
                   '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
                     borderColor: '#7367f0'
