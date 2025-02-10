@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import { Typography, Box, Stack, TextField, styled, ListItem, List, ListItemIcon, ListItemText, Button, Link, MenuItem, FormControl, Select, InputAdornment, TableContainer, Table, TableHead, TableRow, TableBody, TableCell, Paper } from '@mui/material';
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import WindowOutlinedIcon from '@mui/icons-material/WindowOutlined';
@@ -10,64 +10,23 @@ import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined
 import IconButton from '@mui/material/IconButton';
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 
-function SecurityContent() {
-  const [showPassword, setShowPassword] = React.useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
-  const [showCurrentPassword, setShowCurrentPassword] = React.useState(false);
-  const [currentPassword, setCurrentPassword] = React.useState('');
-  const [newPassword, setNewPassword] = React.useState('');
-  const [confirmPassword, setConfirmPassword] = React.useState('');
-  const [showNewPassword, setShowNewPassword] = useState(false);
 
-  const handleChangeCurrentPassword = useCallback((e) => {
-    setCurrentPassword(e.target.value);
-  }, [setCurrentPassword]);
 
-  const handleChangeNewPassword = useCallback((e) => {
-    setNewPassword(e.target.value);
-  }, [setNewPassword]);
 
-  const handleChangeConfirmPassword = useCallback((e) => {
-    setConfirmPassword(e.target.value);
-  }, [setConfirmPassword]);
-
-  const StyledTextField = styled(TextField)({
-    '& .MuiOutlinedInput-root': {
-      height: '40px',
-      fontSize: '0.875rem',
-      fontFamily: '"Public Sans", sans-serif',
-      backgroundColor: '#fff',
-      '& input': {
-        padding: '8px 14px',
-        '&::placeholder': {
-          fontSize: '0.875rem',
-          opacity: 0.5,
-          fontFamily: '"Public Sans", sans-serif',
-        },
-      },
-      '& .MuiOutlinedInput-notchedOutline': {
-        borderColor: 'rgba(0, 0, 0, 0.23)',
-        borderWidth: '1px',
-      },
-      '&:hover .MuiOutlinedInput-notchedOutline': {
-        borderColor: 'rgba(0, 0, 0, 0.87)',
-        borderWidth: '1px',
-      },
-      '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-        borderColor: 'rgb(115, 103, 240)',
-        borderWidth: '2px',
+const StyledTextField = styled(TextField)({
+  '& .MuiOutlinedInput-root': {
+    height: '40px',
+    fontSize: '0.875rem',
+    fontFamily: '"Public Sans", sans-serif',
+    backgroundColor: '#fff',
+    '& input': {
+      padding: '8px 14px',
+      '&::placeholder': {
+        fontSize: '0.875rem',
+        opacity: 0.5,
+        fontFamily: '"Public Sans", sans-serif',
       },
     },
-  });
-
-  const InputLabel = styled(Typography)({
-    fontSize: '0.875rem',
-    color: 'rgba(0, 0, 0, 0.7)',
-    marginBottom: '6px',
-    fontFamily: '"Public Sans", sans-serif',
-  });
-
-  const StyledSelect = styled(Select)(({ theme }) => ({
     '& .MuiOutlinedInput-notchedOutline': {
       borderColor: 'rgba(0, 0, 0, 0.23)',
       borderWidth: '1px',
@@ -80,7 +39,71 @@ function SecurityContent() {
       borderColor: 'rgb(115, 103, 240)',
       borderWidth: '2px',
     },
-  }));
+  },
+});
+
+const InputLabel = styled(Typography)({
+  fontSize: '0.875rem',
+  color: 'rgba(0, 0, 0, 0.7)',
+  marginBottom: '6px',
+  fontFamily: '"Public Sans", sans-serif',
+});
+
+const StyledSelect = styled(Select)(({ theme }) => ({
+  '& .MuiOutlinedInput-notchedOutline': {
+    borderColor: 'rgba(0, 0, 0, 0.23)',
+    borderWidth: '1px',
+  },
+  '&:hover .MuiOutlinedInput-notchedOutline': {
+    borderColor: 'rgba(0, 0, 0, 0.87)',
+    borderWidth: '1px',
+  },
+  '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+    borderColor: 'rgb(115, 103, 240)',
+    borderWidth: '2px',
+  },
+}));
+
+function SecurityContent() {
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [showCurrentPassword, setShowCurrentPassword] = useState(false);
+  const [currentPassword, setCurrentPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+
+  const currentPasswordInputRef = useRef(null);
+  const newPasswordInputRef = useRef(null);
+  const confirmPasswordInputRef = useRef(null);
+
+  const handleChangeCurrentPassword = useCallback((e) => {
+    setCurrentPassword(e.target.value);
+  }, []);
+
+  const handleChangeNewPassword = useCallback((e) => {
+    setNewPassword(e.target.value);
+  }, []);
+
+  const handleChangeConfirmPassword = useCallback((e) => {
+    setConfirmPassword(e.target.value);
+  }, []);
+
+  const toggleCurrentPasswordVisibility = () => {
+    setShowCurrentPassword(!showCurrentPassword);
+    currentPasswordInputRef.current.type = showCurrentPassword ? 'password' : 'text';
+  };
+
+  const toggleNewPasswordVisibility = () => {
+    setShowNewPassword(!showNewPassword);
+    newPasswordInputRef.current.type = showNewPassword ? 'password' : 'text';
+  };
+
+  const toggleConfirmPasswordVisibility = () => {
+    setShowConfirmPassword(!showConfirmPassword);
+    confirmPasswordInputRef.current.type = showConfirmPassword ? 'password' : 'text';
+  };
+
 
   return (
     <>
@@ -98,12 +121,13 @@ function SecurityContent() {
                 placeholder=".................."
                 variant="outlined"
                 value={currentPassword}
+                ref={currentPasswordInputRef}
                 InputProps={{
                   endAdornment: (
                     <InputAdornment position="end">
                       <IconButton
                         aria-label="toggle password visibility"
-                        onClick={() => setShowCurrentPassword(!showCurrentPassword)}
+                        onClick={toggleCurrentPasswordVisibility}
                         onMouseDown={(event) => event.preventDefault()}
                         edge="end"
                       >
@@ -131,12 +155,13 @@ function SecurityContent() {
                 placeholder=".................."
                 variant="outlined"
                 value={newPassword}
+                ref={newPasswordInputRef}
                 InputProps={{
                   endAdornment: (
                     <InputAdornment position="end">
                       <IconButton
                         aria-label="toggle password visibility"
-                        onClick={() => setShowNewPassword(!showNewPassword)}
+                        onClick={toggleNewPasswordVisibility}
                         onMouseDown={(event) => event.preventDefault()}
                         edge="end"
                       >
@@ -160,12 +185,13 @@ function SecurityContent() {
                 placeholder=".................."
                 variant="outlined"
                 value={confirmPassword}
+                ref={confirmPasswordInputRef}
                 InputProps={{
                   endAdornment: (
                     <InputAdornment position="end">
                       <IconButton
                         aria-label="toggle password visibility"
-                        onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                        onClick={toggleConfirmPasswordVisibility}
                         onMouseDown={(event) => event.preventDefault()}
                         edge="end"
                       >

@@ -187,10 +187,7 @@ function AccountPage() {
                 </Box>
                 <Footer />
             </Box>
-<<<<<<< Updated upstream
-=======
             {/* <Footer /> */}
->>>>>>> Stashed changes
         </Box>
     );
 }
