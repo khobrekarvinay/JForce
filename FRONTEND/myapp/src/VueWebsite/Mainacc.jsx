@@ -124,7 +124,7 @@ function AccountPage() {
             {/* Main Content ------------------------*/}
             <Box sx={{ display: 'flex', flexDirection: 'column', flexGrow: 1, marginLeft: isSidebarHidden ? 0 : '280px' }}>
                 {/* Main Content Container */}
-                <Box sx={{ width: '100%', padding: '24px', flexGrow: 1 }}>
+                <Box sx={{  padding: '24px', flexGrow: 1 }}>
                     {/*Search Bar */}
                     <SearchContainer>
                         <IconButton sx={{ p: '10px' }} aria-label="search">

@@ -41,3 +41,85 @@
 // Box: The Box component serves as a wrapper component
 
 // Stack: Stack is like a flex container.
+
+// Let's break down how these custom styled components are made:
+
+// *Overview of Styled Components*
+// Styled components are a way to write CSS in your JavaScript files. They allow you to write CSS code as JavaScript functions, which can then be used as React components.
+
+// *Creating a Styled Component*
+// To create a styled component, you use the `styled` function from the `styled-components` library. The `styled` function takes a HTML element or a React component as an argument.
+
+// *Syntax*
+// The syntax for creating a styled component is as follows:
+
+// ```
+// jsx
+// const StyledComponent = styled(HTML Element or React Component)`
+//   /* CSS styles */
+// `;
+// ```
+
+// *Example: StyledTextField*
+// Let's take the `StyledTextField` component as an example:
+
+// ```
+// jsx
+// const StyledTextField = styled(TextField)`
+//   /* CSS styles */
+// `;
+// ```
+
+// In this example, `TextField` is a React component from the Material-UI library. The `styled` function takes the `TextField` component as an argument and returns a new styled component, `StyledTextField`.
+
+// *CSS Styles*
+// The CSS styles for the styled component are defined inside the backticks (``). These styles will be applied to the underlying HTML element or React component.
+
+// *Nested Selectors*
+// Styled components also support nested selectors. For example:
+
+// ```
+// jsx
+// const StyledTextField = styled(TextField)`
+//   & .MuiOutlinedInput-root {
+//     /* styles for .MuiOutlinedInput-root */
+//   }
+//   & input {
+//     /* styles for input */
+//   }
+// `;
+// ```
+
+// In this example, the `&` symbol refers to the parent element (in this case, the `TextField` component). The `.MuiOutlinedInput-root` and `input` selectors are nested inside the parent element.
+
+// *Props and Theme*
+// Styled components can also accept props and theme variables. For example:
+
+// ```
+// jsx
+// const StyledSelect = styled(Select)(({ theme }) => ({
+//   /* styles that use theme variables */
+// }));
+// ```
+
+// In this example, the `StyledSelect` component accepts a `theme` prop, which can be used to access theme variables.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

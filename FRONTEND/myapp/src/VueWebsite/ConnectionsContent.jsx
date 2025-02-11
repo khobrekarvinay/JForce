@@ -71,9 +71,10 @@ const SocialAccounts = [
 
 function ConnectionsContent() {
     return (
-        <Box justifyContent='space-around' display='flex' sx={{ p: 3, maxWidth: 1200, mx: "auto", bgcolor: "white", borderRadius: 2, boxShadow: 3, marginBottom: '30px' }}>
+        <Box justifyContent='space-around' display='flex' sx={{ p: 3, flexDirection: { xs: "column", md: "row" }, maxWidth: 1200, mx: "auto", bgcolor: "white", borderRadius: 2, boxShadow: 3, marginBottom: '30px' }}>
+            
             <Box sx={{  }}>
-                <CardContent>
+                {/* <CardContent> */}
                     <Typography variant="h6" sx={{ color: '#444050' }}>
                         Connected Accounts
                     </Typography>
@@ -96,11 +97,11 @@ function ConnectionsContent() {
                             {index < ConnectedAccounts.length - 1 && <Divider />}
                         </Box>
                     ))}
-                </CardContent>
+                {/* </CardContent> */}
             </Box>
 
             <Box sx={{  }}>
-                <CardContent>
+                {/* <CardContent> */}
                     <Typography variant="h6" sx={{ color: '#444050' }}>
                         Social Accounts
                     </Typography>
@@ -133,8 +134,9 @@ function ConnectionsContent() {
                             {index < SocialAccounts.length - 1 && <Divider />}
                         </Box>
                     ))}
-                </CardContent>
+                {/* </CardContent> */}
             </Box>
+
         </Box>
     );
 }

@@ -1,39 +1,20 @@
 import React, { useState } from 'react';
-import {
-    Box,
-    Typography,
-    Card,
-    CardContent,
-    Button,
-    Radio,
-    TextField,
-    FormControlLabel,
-    Switch,
-    styled,
-    IconButton,
-    LinearProgress,
-    Select,
-    MenuItem,
-    InputLabel,
-    FormControl,
-    Table,
-    TableBody,
-    TableCell,
-    TableContainer,
-    TableHead,
-    TableRow,
-    Checkbox,
-    Stack,
-    RadioGroup,
-    Avatar
-} from '@mui/material';
+import { Box, Typography, Card, CardContent, Button, Radio, TextField, FormControlLabel, Switch, styled, IconButton, LinearProgress, Select, MenuItem, InputLabel, FormControl, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Checkbox, Stack, RadioGroup, Avatar, ThemeProvider, createTheme } from '@mui/material';
 import { styled as muiStyled } from '@mui/material/styles';
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
+import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import Alert from '@mui/material/Alert';
-import VisibilityIcon from '@mui/icons-material/Visibility';
+import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import WarningAmberIcon from '@mui/icons-material/WarningAmber';
+import MaterialTable from '@material-table/core';
+import DownloadIcon from '@mui/icons-material/Download';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import CheckCircleOutlinedIcon from '@mui/icons-material/CheckCircleOutlined';
+import InfoIcon from '@mui/icons-material/Info';
+import PieChartIcon from '@mui/icons-material/PieChart';
+import SaveIcon from '@mui/icons-material/Save';
+import TonalityOutlinedIcon from '@mui/icons-material/TonalityOutlined';
+
 
 const CenteredBox = styled(Box)({
     display: 'flex',
@@ -107,114 +88,147 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     }
 }));
 
-const mockBillingData = [
+const columns = [
     {
-        id: '#5089',
-        client: 'Jamal Kerrod',
-        image: 'https://via.placeholder.com/40',
-        role: 'CEO',
-        software: 'Software Development',
-        total: '$3077',
-        issuedDate: '09 May 2020',
-        balance: 'Paid'
+        title: "#", field: "id", cellStyle: {
+            color: '#7367f0'
+        }
     },
     {
-        id: '#5041',
-        client: 'Shamus Tuttle',
-        image: 'https://via.placeholder.com/40',
-        role: 'CTO',
-        software: 'Software Development',
-        total: '$2230',
-        issuedDate: '19 Nov 2020',
-        balance: 'Paid'
+        title: 'Status',
+        field: 'status',
+        render: (rowData) => (
+            <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                {rowData.status === 'downloaded' && (
+                    <DownloadIcon sx={{backgroundColor:'#EBEBED', padding:1, borderRadius:'50%'}} fontSize="small" />
+                )}
+                {rowData.status === 'sent' && (
+                    <CheckCircleOutlinedIcon sx={{backgroundColor:'#EBEBED', padding:1, borderRadius:'50%'}} />
+                )}
+                {rowData.status === 'past_due' && (
+                    <InfoIcon sx={{backgroundColor:'#FFE2E3', padding:1, borderRadius:'50%'}} fontSize="small" color="warning" />
+                )}
+                {rowData.status === 'paid' && (
+                    <TonalityOutlinedIcon sx={{backgroundColor:'#DDF6E8', padding:1, borderRadius:'50%'}} fontSize="small" color="success" />
+                )}
+                {rowData.status === 'partial_payment' && (
+                    <TonalityOutlinedIcon sx={{backgroundColor:'#DDF6E8', padding:1, borderRadius:'50%'}} fontSize="small" color="success" />
+                )}
+
+                {rowData.status === 'draft' && (
+                    <SaveIcon sx={{backgroundColor:'#E9E7FD', padding:1, borderRadius:'50%'}} fontSize="small" color='secondary' />
+                )}
+            </Box>
+        ),
     },
     {
-        id: '#5027',
-        client: 'Devonne Walbridge',
-        image: 'https://via.placeholder.com/40',
-        role: 'CFO',
-        software: 'Software Development',
-        total: '$2787',
-        issuedDate: '25 Sep 2020',
-        balance: 'Paid'
+        title: "Client", field: "client",
+        render: (rowData) => (
+            <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                <Box>
+                    <Avatar {...stringAvatar(rowData.client)} />
+                </Box>
+                <Box>
+                    <Typography sx={{ ml: 2 }}>{rowData.client}</Typography>
+                    <Typography sx={{ ml: 2, fontSize: '13px', color: '#6d6b77' }}>{rowData.software}</Typography>
+                </Box>
+            </Box>
+        ),
+        cellStyle: {
+            minWidth: 300,
+            maxWidth: 500
+        }
+    },
+    { title: "Total", field: "total" },
+    { title: "IssuedDate", field: "issuedDate" },
+    {
+        title: "Balance", field: "balance",
+        cellStyle: {
+            color: '#28C76F'
+        }
     },
     {
-        id: '#5024',
-        client: 'Ariella Filippyev',
-        image: 'https://via.placeholder.com/40',
-        role: 'CMO',
-        software: 'Software Development',
-        total: '$5285',
-        issuedDate: '02 Aug 2020',
-        balance: '-$202'
-    },
-    {
-        id: '#5020',
-        client: 'Roy Southerell',
-        image: 'https://via.placeholder.com/40',
-        role: 'COO',
-        software: 'UI/UX Design & Development',
-        total: '$5219',
-        issuedDate: '15 Dec 2020',
-        balance: 'Paid'
-    },
-    {
-        id: '#4995',
-        client: 'Raynell Clendennen',
-        image: 'https://via.placeholder.com/40',
-        role: 'CTO',
-        software: 'Template Customization',
-        total: '$3313',
-        issuedDate: '09 Jun 2020',
-        balance: 'Paid'
-    },
-    {
-        id: '#4993',
-        client: 'Lutero Aloshchechkin',
-        image: 'https://via.placeholder.com/40',
-        role: 'CFO',
-        software: 'Unlimited Extended License',
-        total: '$4836',
-        issuedDate: '22 Oct 2020',
-        balance: 'Paid'
-    },
-    {
-        id: '#4989',
-        client: 'Orson Grafton',
-        image: 'https://via.placeholder.com/40',
-        role: 'CMO',
-        software: 'Unlimited Extended License',
-        total: '$5293',
-        issuedDate: '01 Aug 2020',
-        balance: 'Paid'
-    },
-    {
-        id: '#4989',
-        client: 'Lorine Hischke',
-        image: 'https://via.placeholder.com/40',
-        role: 'COO',
-        software: 'Unlimited Extended License',
-        total: '$3623',
-        issuedDate: '23 Sep 2020',
-        balance: 'Paid'
-    },
-    {
-        id: '#4965',
-        client: 'Yelena O Hear',
-        image: 'https://via.placeholder.com/40',
-        role: 'CTO',
-        software: 'Unlimited Extended License',
-        total: '$3789',
-        issuedDate: '18 Mar 2021',
-        balance: '$666'
+        title: "Actions", field: "actions",
+        render: (rowData) => (
+            <Box sx={{ display: 'flex', justifyContent: 'flex-start' }}>
+                <IconButton>
+                    <DeleteOutlineOutlinedIcon />
+                </IconButton>
+                <IconButton>
+                    <RemoveRedEyeOutlinedIcon />
+                </IconButton>
+                <IconButton>
+                    <MoreVertIcon />
+                </IconButton>
+            </Box>
+        )
     }
 ];
+
+const mockBillingData = [
+    { id: '#5089', client: 'Jamal Kerrod', image: 'https://via.placeholder.com/40', status: 'sent', software: 'Software Development', total: '$3077', issuedDate: '09 May 2020', balance: 'Paid' },
+    { id: '#5041', client: 'Shamus Tuttle', image: 'https://via.placeholder.com/40', status: 'sent', software: 'Software Development', total: '$2230', issuedDate: '19 Nov 2020', balance: 'Paid' },
+    { id: '#5027', client: 'Devonne Walbridge', image: 'https://via.placeholder.com/40', status: 'partial_payment', software: 'Software Development', total: '$2787', issuedDate: '25 Sep 2020', balance: 'Paid' },
+    { id: '#5024', client: 'Ariella Filippyev', image: 'https://via.placeholder.com/40', status: 'downloaded', software: 'Unlimited Extended License', total: '$5285', issuedDate: '02 Aug 2020', balance: '-$202' },
+    { id: '#5020', client: 'Roy Southerell', image: 'https://via.placeholder.com/40', status: 'paid', software: 'UI/UX Design & Development', total: '$5219', issuedDate: '15 Dec 2020', balance: 'Paid' },
+    { id: '#4995', client: 'Raynell Clendennen', image: 'https://via.placeholder.com/40', status: 'partial_payment', software: 'Template Customization', total: '$3313', issuedDate: '09 Jun 2020', balance: 'Paid' },
+    { id: '#4993', client: 'Lutero Aloshechkin', image: 'https://via.placeholder.com/40', status: 'draft', software: 'Unlimited Extended License', total: '$4836', issuedDate: '22 Oct 2020', balance: 'Paid' },
+    { id: '#4989', client: 'Orson Grafton', image: 'https://via.placeholder.com/40', status: 'draft', software: 'Unlimited Extended License', total: '$5293', issuedDate: '01 Aug 2020', balance: 'Paid' },
+    { id: '#4989', client: 'Lorine Hischke', image: 'https://via.placeholder.com/40', status: 'past_due', software: 'Unlimited Extended License', total: '$3623', issuedDate: '23 Sep 2020', balance: 'Paid' },
+    { id: '#4965', client: 'Yelena O Hear', image: 'https://via.placeholder.com/40', status: 'sent', software: 'Unlimited Extended License', total: '$3789', issuedDate: '18 Mar 2021', balance: '$666' },
+    { id: '#4963', client: 'Morgan Ewbanks', image: 'https://via.placeholder.com/40', status: 'sent', software: 'Unlimited Extended License', total: '$2029', issuedDate: '28 Mar 2020', balance: 'Paid' },
+    { id: '#4943', client: 'Fancy Hunnicot', image: 'https://via.placeholder.com/40', status: 'paid', status: 'downloaded', software: 'Template Customization', total: '$3198', issuedDate: '16 Aug 2020', balance: '-$253' },
+    { id: '#4917', client: 'Charo Praill', image: 'https://via.placeholder.com/40', status: 'past_due', software: 'Software Development', total: '$3367', issuedDate: '24 Dec 2020', balance: 'Paid' },
+    { id: '#4881', client: 'Zeb Kenningham', image: 'https://via.placeholder.com/40', status: 'paid', software: 'UI/UX Design & Development', total: '$2771', issuedDate: '24 Jun 2020', balance: 'Paid' },
+    { id: '#4877', client: 'Tudor Pereira', image: 'https://via.placeholder.com/40', status: 'sent', software: 'UI/UX Design & Development', total: '$2713', issuedDate: '22 Nov 2020', balance: '$407' },
+    { id: '#4831', client: 'Dorris Grigoriev', image: 'https://via.placeholder.com/40', status: 'partial_payment', software: 'UI/UX Design & Development', total: '$4056', issuedDate: '30 Jun 2020', balance: '$815' },
+    { id: '#4798', client: 'Lloyd Janaszkiewicz', image: 'https://via.placeholder.com/40', status: 'past_due', software: 'Unlimited Extended License', total: '$2825', issuedDate: '14 Oct 2020', balance: '-$459' },
+    { id: '#4794', client: 'Hephzibah Hanshawe', image: '(link unavailable)', status: 'paid', software: 'Template Customization', total: '$2719', issuedDate: '04 Feb 2021', balance: 'Paid' },
+    { id: '#4790', client: 'Ozzie Youles', image: '(link unavailable)', status: 'downloaded', software: 'Software Development', total: '$4776', issuedDate: '02 Jun 2020', balance: '$305' },
+    { id: '#4765', client: 'Pryce Scothorn', image: '(link unavailable)', status: 'paid', software: 'Unlimited Extended License', total: '$3904', issuedDate: '30 Sep 2020', balance: '$951' },
+    { id: '#4748', client: 'Ruddie Gabb', image: '(link unavailable)', status: 'past_due', software: 'UI/UX Design & Development', total: '$5591', issuedDate: '07 Jun 2020', balance: 'Paid' },
+    { id: '#4743', client: 'Britteny Barham', image: '(link unavailable)', status: 'sent', software: 'UI/UX Design & Development', total: '$3668', issuedDate: '15 Dec 2020', balance: '$731' },
+    { id: '#4716', client: 'Ninette Forde', image: '(link unavailable)', status: 'downloaded', software: 'Template Customization', total: '$2872', issuedDate: '18 Oct 2020', balance: 'Paid' },
+    { id: '#4687', client: 'Peggy Viccary', image: '(link unavailable)', status: 'past_due', software: 'Template Customization', total: '$4309', issuedDate: '10 Feb 2021', balance: '-$205' },
+    { id: '#4683', client: 'Isidor Navarro', image: '(link unavailable)', status: 'partial_payment', software: 'Software Development', total: '$2060', issuedDate: '08 Dec 2020', balance: 'Paid' },
+    { id: '#4677', client: 'Syman Asbery', image: '(link unavailable)', status: 'downloaded', software: 'Template Customization', total: '$3503', issuedDate: '22 May 2020', balance: 'Paid' },
+    { id: '#4651', client: 'Jennica Aronov', image: '(link unavailable)', status: 'downloaded', software: 'Template Customization', total: '$2783', issuedDate: '22 Oct 2020', balance: 'Paid' },
+    { id: '#4632', client: 'Eadith Garshore', image: '(link unavailable)', status: 'sent', software: 'Template Customization', total: '$5565', issuedDate: '06 Mar 2021', balance: 'Paid' },
+    { id: '#4593', client: 'Darwin Dory', image: '(link unavailable)', status: 'paid', software: 'Template Customization', total: '$3325', issuedDate: '02 Mar 2021', balance: '$361' },
+    { id: '#4582', client: 'Keane Barfitt', image: '(link unavailable)', status: 'partial_payment', software: 'Template Customization', total: '$5612', issuedDate: '12 Apr 2020', balance: '$883' },
+    { id: '#4575', client: 'Hermia Fosten', image: '(link unavailable)', status: 'sent', software: 'UI/UX Design & Development', total: '$3102', issuedDate: '25 Aug 2020', balance: '-$153' },
+    { id: '#4567', client: 'Deny Pell', image: '(link unavailable)', status: 'draft', software: 'Unlimited Extended License', total: '$3171', issuedDate: '25 Sep 2020', balance: '-$205' },
+    { id: '#4538', client: 'Brandy Cleveland', image: '(link unavailable)', status: 'draft', software: 'UI/UX Design & Development', total: '$2483', issuedDate: '10 Jul 2020', balance: 'Paid' },
+    { id: '#4535', client: 'Ignace Levington', image: '(link unavailable)', status: 'partial_payment', software: 'UI/UX Design & Development', total: '$3128', issuedDate: '10 Sep 2020', balance: 'Paid' },
+    { id: '#4528', client: 'Rahal Bezemer', image: '(link unavailable)', status: 'partial_payment', software: 'Software Development', total: '$3208', issuedDate: '06 Sep 2020', balance: 'Paid' },
+    { id: '#4515', client: 'Kendell Longstreeth', image: '(link unavailable)', status: 'downloaded', software: 'Software Development', total: '$4749', issuedDate: '11 Feb 2021', balance: 'Paid' },
+    { id: '#4511', client: 'Donni Goning', image: '(link unavailable)', status: 'draft', software: 'Software Development', total: '$4558', issuedDate: '01 Oct 2020', balance: 'Paid' },
+    { id: '#4506', client: 'Briny Undrell', image: '(link unavailable)', status: 'downloaded', software: 'Unlimited Extended License', total: '$3719', issuedDate: '03 Nov 2020', balance: 'Paid' },
+    { id: '#4477', client: 'Roxy Floodgate', image: '(link unavailable)', status: 'draft', software: 'Software Development', total: '$3428', issuedDate: '23 Apr 2020', balance: '$724' },
+    { id: '#4456', client: 'Claudine Mechell', image: '(link unavailable)', status: 'sent', software: 'Software Development', total: '$5578', issuedDate: '23 Jul 2020', balance: 'Paid' },
+    { id: '#4449', client: 'Tom OLoughlin', image: '(link unavailable)', status: 'downloaded', software: 'Unlimited Extended License', total: '$5200', issuedDate: '17 Jan 2021', balance: 'Paid' },
+    { id: '#4446', client: 'Gray Waldock', image: '(link unavailable)', status: 'sent', software: 'Software Development', total: '$2477', issuedDate: '01 Apr 2020', balance: 'Paid' },
+    { id: '#4439', client: 'Bealle Daskiewicz', image: '(link unavailable)', status: 'sent', software: 'Unlimited Extended License', total: '$2032', issuedDate: '30 Nov 2020', balance: 'Paid' },
+    { id: '#4437', client: 'Orbadiah Norton', image: '(link unavailable)', status: 'downloaded', software: 'Template Customization', total: '$3851', issuedDate: '25 Aug 2020', balance: 'Paid' },
+    { id: '#4416', client: 'Shelly Pyott', image: '(link unavailable)', status: 'sent', status: 'downloaded', status: 'sent', software: 'Unlimited Extended License', total: '$4372', issuedDate: '17 Sep 2020', balance: '-$344' },
+    { id: '#4410', client: 'Keslie Lermit', image: '(link unavailable)', status: 'sent', software: 'UI/UX Design & Development', total: '$4077', issuedDate: '01 Feb 2021', balance: 'Paid' },
+    { id: '#4401', client: 'Bealle Daskiewicz', image: '(link unavailable)', status: 'sent', software: 'Unlimited Extended License', total: '$2032', issuedDate: '30 Nov 2020', balance: 'Paid' },
+    { id: '#4375', client: 'Dido Smitton', image: '(link unavailable)', status: 'partial_payment', software: 'Template Customization', total: '$5181', issuedDate: '22 Oct 2020', balance: 'Paid' },
+    { id: '#4341', client: 'Ninnetta Roylance', image: '(link unavailable)', status: 'downloaded', software: 'Software Development', total: '$3740', issuedDate: '01 Nov 2020', balance: 'Paid' },
+    { id: '#4323', client: 'Hershel Pennetti', image: '(link unavailable)', status: 'paid', software: 'Template Customization', total: '$2869', issuedDate: '22 Mar 2021', balance: 'Paid' }
+];
+
+const theme = createTheme({
+    direction: "ltr",
+});
+
 function stringToColor() {
     const r = Math.floor(Math.random() * 256);
     const g = Math.floor(Math.random() * 256);
     const b = Math.floor(Math.random() * 256);
     return `rgb(${r}, ${g}, ${b})`;
 }
+
 function stringAvatar(name) {
     return {
         sx: {
@@ -288,7 +302,7 @@ function BillingContent() {
                                 fontSize: '1.25rem',
                                 fontWeight: 500,
                                 mb: 3,
-                                fontFamily: '"Public Sans", sans-serif', color:'#444050'
+                                fontFamily: '"Public Sans", sans-serif', color: '#444050'
                             }}
                         >
                             Current Plan
@@ -346,7 +360,7 @@ function BillingContent() {
                                     fontWeight: 500,
                                     fontSize: '1rem',
                                     mr: 1,
-                                    fontFamily: '"Public Sans", sans-serif', color:'#444050'
+                                    fontFamily: '"Public Sans", sans-serif', color: '#444050'
                                 }}
                             >
                                 $199 Per Month
@@ -496,11 +510,11 @@ function BillingContent() {
             <Box>
                 <CardContent>
                     <Box sx={{ p: 3, maxWidth: 1400, width: '100%', mx: "auto", bgcolor: "white", borderRadius: 2, boxShadow: 3 }}>
-                        <Typography variant="h6" sx={{color:'#444050'}} gutterBottom>Payment Methods</Typography>
+                        <Typography variant="h6" sx={{ color: '#444050' }} gutterBottom>Payment Methods</Typography>
                         <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
                             <Stack spacing={1} flex={1}>
                                 <FormControl>
-                                    <RadioGroup row sx={{color:'#444050'}}>
+                                    <RadioGroup row sx={{ color: '#444050' }}>
                                         <FormControlLabel value="credit" control={<Radio />} label="Credit/Debit Card" />
                                         <FormControlLabel value="paypal" control={<Radio />} label="Paypal account" />
                                     </RadioGroup>
@@ -521,7 +535,7 @@ function BillingContent() {
                                         <StyledTextField fullWidth placeholder="654" variant="outlined" sx={{ textTransform: 'none' }} />
                                     </Stack>
                                 </Stack>
-                                <FormControlLabel sx={{color:'#444050'}} control={<Switch />} label="Save card for future billing?" />
+                                <FormControlLabel sx={{ color: '#444050' }} control={<Switch />} label="Save card for future billing?" />
                             </Stack>
 
 
@@ -544,7 +558,7 @@ function BillingContent() {
                                     </Box>
                                     {/* Third line: card number & expiry */}
                                     <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 1 }}>
-                                        <Typography variant="body2" sx={{color:'#6D6B77'}}>_* ** 9856</Typography>
+                                        <Typography variant="body2" sx={{ color: '#6D6B77' }}>_* ** 9856</Typography>
                                         <Typography variant="caption" color="text.secondary">Card expires at 12/26</Typography>
                                     </Box>
                                 </Box>
@@ -580,7 +594,7 @@ function BillingContent() {
                 </CardContent>
             </Box>
             {/* Billing Address Card -------------------------------------------------------------------------*/}
-            <Box sx={{ p: 3, maxWidth: 1400, width: '100%', mx: "auto", bgcolor: "white", borderRadius: 2, boxShadow: 3 }}>
+            <Box sx={{ p: 3, mb: 4, maxWidth: 1400, width: '100%', mx: "auto", bgcolor: "white", borderRadius: 2, boxShadow: 3 }}>
                 <Typography variant="h6" gutterBottom sx={{ mb: 2 }}>Billing Address</Typography>
                 <Stack spacing={2}>
                     <Stack direction={{ xs: "column", sm: "row" }} spacing={2}>
@@ -641,88 +655,59 @@ function BillingContent() {
                     </Stack>
                 </Stack>
             </Box>
-            {/* Billing History Card */}
-            <Card sx={{ mt: 3, boxShadow: '0px 2px 10px rgba(76, 78, 100, 0.22)' }}>
-                <CardContent>
-                    <Typography
-                        variant="h6"
-                        sx={{
-                            mb: 3,
-                            fontSize: '1.25rem',
-                            fontWeight: 500,
-                            fontFamily: '"Public Sans", sans-serif'
-                        }}
-                    >
-                        Billing History
-                    </Typography>
-                    <TableContainer>
-                        <Table sx={{ minWidth: 650 }} aria-label="billing history table">
-                            <TableHead>
-                                <TableRow>
-                                    <TableCell padding="checkbox" sx={{ borderBottom: '1px solid rgba(76, 78, 100, 0.2)', py: 2, fontSize: '0.75rem', fontWeight: 600, color: 'text.secondary', fontFamily: '"Public Sans", sans-serif' }} >
-                                        <Checkbox color="primary" indeterminate={selectAll} checked={selectAll} onChange={handleSelectAllClick} />
-                                    </TableCell>
-                                    <TableCell sx={{ borderBottom: '1px solid rgba(76, 78, 100, 0.2)', py: 2, fontSize: '0.75rem', fontWeight: 600, color: 'text.secondary', fontFamily: '"Public Sans", sans-serif' }} > Invoice ID </TableCell>
-                                    <TableCell sx={{ borderBottom: '1px solid rgba(76, 78, 100, 0.2)', py: 2, fontSize: '0.75rem', fontWeight: 600, color: 'text.secondary', fontFamily: '"Public Sans", sans-serif' }} > Client </TableCell>
-                                    <TableCell sx={{ borderBottom: '1px solid rgba(76, 78, 100, 0.2)', py: 2, fontSize: '0.75rem', fontWeight: 600, color: 'text.secondary', fontFamily: '"Public Sans", sans-serif' }} > Total </TableCell>
-                                    <TableCell sx={{ borderBottom: '1px solid rgba(76, 78, 100, 0.2)', py: 2, fontSize: '0.75rem', fontWeight: 600, color: 'text.secondary', fontFamily: '"Public Sans", sans-serif' }} > Issued Date </TableCell>
-                                    <TableCell sx={{ borderBottom: '1px solid rgba(76, 78, 100, 0.2)', py: 2, fontSize: '0.75rem', fontWeight: 600, color: 'text.secondary', fontFamily: '"Public Sans", sans-serif' }} > Balance </TableCell>
-                                    <TableCell sx={{ borderBottom: '1px solid rgba(76, 78, 100, 0.2)', py: 2, fontSize: '0.75rem', fontWeight: 600, color: 'text.secondary', fontFamily: '"Public Sans", sans-serif' }} > Actions </TableCell>
-                                </TableRow>
-                            </TableHead>
-                            <TableBody>
-                                {mockBillingData.map((row) => (
-                                    <TableRow key={row.id} sx={{ '&:nth-of-type(odd)': { backgroundColor: 'rgba(76, 78, 100, 0.04)' }, '&:hover': { backgroundColor: 'rgba(76, 78, 100, 0.08)' } }} >
-                                        <TableCell padding="checkbox" sx={{ py: 2, fontSize: '0.875rem', fontFamily: '"Public Sans", sans-serif', color: 'text.primary' }} >
-                                            <Checkbox color="primary" checked={isSelected(row.id)} onChange={(event) => handleClick(event, row.id)} />
-                                        </TableCell>
-                                        <TableCell sx={{ py: 2, fontSize: '0.875rem', fontFamily: '"Public Sans", sans-serif', color: 'text.primary' }} >
-                                            <Typography sx={{ color: 'primary.main' }}>{row.id}</Typography>
-                                        </TableCell>
-                                        <TableCell>
-                                            <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                                                <Avatar sx={{ bgcolor: stringToColor(), width: 40, height: 40, mr: 2 }} >
-                                                    {row.client.split(' ')[0][0]}{row.client.split(' ')[1][0]}
-                                                </Avatar>
-                                                <Box>
-                                                    <Typography sx={{ fontSize: '0.875rem', fontFamily: '"Public Sans", sans-serif' }} >
-                                                        {row.client}
-                                                    </Typography>
-                                                    <Typography component="span" sx={{ fontSize: '0.75rem', color: 'text.secondary' }} >
-                                                        {row.software}
-                                                    </Typography>
-                                                </Box>
-                                            </Box>
-                                        </TableCell>
-                                        <TableCell sx={{ py: 2, fontSize: '0.875rem', fontFamily: '"Public Sans", sans-serif', color: 'text.primary' }} >
-                                            {row.total}
-                                        </TableCell>
-                                        <TableCell sx={{ py: 2, fontSize: '0.875rem', fontFamily: '"Public Sans", sans-serif', color: 'text.secondary' }} >
-                                            {row.issuedDate}
-                                        </TableCell>
-                                        <TableCell>
-                                            <Typography sx={{ fontSize: '0.875rem', fontFamily: '"Public Sans", sans-serif', textAlign: 'center', color: row.balance === 'Paid' ? '#28C76F' : 'error.main', borderRadius: '5px', backgroundColor: row.balance === 'Paid' ? '#DDF6E8' : 'none', fontWeight: 500 }} >
-                                                {row.balance}
-                                            </Typography>
-                                        </TableCell>
-                                        <TableCell sx={{ py: 2, fontSize: '0.875rem', fontFamily: '"Public Sans", sans-serif', color: 'text.primary' }} >
-                                            <Stack direction="row" spacing={0}>
-                                                <Button variant="outlined" startIcon={<VisibilityIcon />} sx={{ border: 'none' }} />
-                                                <Button variant="outlined" startIcon={<DeleteIcon />} sx={{ border: 'none' }} />
-                                                <Button variant="outlined" startIcon={<MoreVertIcon />} sx={{ border: 'none' }} />
-                                            </Stack>
-                                        </TableCell>
-                                    </TableRow>
-                                ))}
-                            </TableBody>
-                        </Table>
-                    </TableContainer>
-                </CardContent>
-            </Card>
+
+            {/* Billing card / Advance data table */}
+            {/* <ThemeProvider sx={{ p: 3, maxWidth: 1400, width: '100%', mx: "auto", bgcolor: "white", borderRadius: 2, boxShadow: 3 }} theme={theme}> */}
+                <MaterialTable sx={{padding:4}} title="Billing History" columns={columns} data={mockBillingData}
+                    options={{
+                        headerStyle: {
+                            color: '#444050', textTransform: 'uppercase', fontWeight: 'bold'
+                        },
+                        selection: true,
+                        searchFieldVariant: 'standard', searchAutoFocus: true,
+                        searchFieldStyle: {
+                            '& .MuiOutlinedInput-root': {
+                                height: '40px',
+                                fontSize: '0.875rem',
+                                fontFamily: '"Public Sans", sans-serif',
+                                backgroundColor: '#fff',
+                                '& input': {
+                                    padding: '8px 14px',
+                                    '&::placeholder': {
+                                        fontSize: '0.875rem',
+                                        opacity: 0.5,
+                                        fontFamily: '"Public Sans", sans-serif',
+                                    },
+                                },
+                                '& .MuiOutlinedInput-notchedOutline': {
+                                    borderColor: 'rgba(0, 0, 0, 0.23)',
+                                    borderWidth: '1px',
+                                },
+                                '&:hover .MuiOutlinedInput-notchedOutline': {
+                                    borderColor: 'rgba(0, 0, 0, 0.87)',
+                                    borderWidth: '1px',
+                                },
+                                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                                    borderColor: 'rgb(115, 103, 240)',
+                                    borderWidth: '2px',
+                                },
+                            },
+                        },
+                        paging: true, pageSizeOptions: [10, 25, 50, 100], pageSize: 10, showFirstLastPageButtons: false, paginationType: 'stepped',
+                    }}
+
+                    localization={{
+                        pagination: {
+                            labelRowsPerPage: 'Show'
+                        }
+                    }}
+
+                />
+            {/* </ThemeProvider> */}
+
         </Box >
     );
 }
 
 export default BillingContent;
 
-{/* Billing History Card */ }

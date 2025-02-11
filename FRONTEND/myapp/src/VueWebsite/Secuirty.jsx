@@ -66,7 +66,6 @@ const StyledSelect = styled(Select)(({ theme }) => ({
 
 function SecurityContent() {
   const [showNewPassword, setShowNewPassword] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [showCurrentPassword, setShowCurrentPassword] = useState(false);
   const [currentPassword, setCurrentPassword] = useState('');

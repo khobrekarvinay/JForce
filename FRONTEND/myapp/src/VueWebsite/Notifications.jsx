@@ -12,9 +12,9 @@ const NotificationsContent = () => {
   ];
 
   return (
-    <Box sx={{ p: 3, maxWidth: 1400, mx: 'auto' }}>
+    <Box sx={{ maxWidth: 1400, mx: 'auto' }}>
 
-      <Card sx={{ boxShadow: '0px 2px 10px rgba(76, 78, 100, 0.22)' }}>
+      <Card sx={{ boxShadow: '0px 2px 10px rgba(76, 78, 100, 0.22)', borderRadius: 2 }}>
         <CardContent>
           {/* Recent Devices Section */}
           <Box sx={{ mb: 4 }}>
@@ -182,7 +182,7 @@ const NotificationsContent = () => {
                     borderColor: 'rgba(76, 78, 100, 0.22)'
                   },
                   '&:hover .MuiOutlinedInput-notchedOutline': {
-                    borderColor: 'rgba(76, 78, 100, 0.32)' 
+                    borderColor: 'rgba(76, 78, 100, 0.32)'
                   },
                   '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
                     borderColor: '#7367f0'
