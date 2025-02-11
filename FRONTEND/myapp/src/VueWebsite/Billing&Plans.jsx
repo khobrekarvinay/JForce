@@ -657,7 +657,7 @@ function BillingContent() {
             </Box>
 
             {/* Billing card / Advance data table */}
-            {/* <ThemeProvider sx={{ p: 3, maxWidth: 1400, width: '100%', mx: "auto", bgcolor: "white", borderRadius: 2, boxShadow: 3 }} theme={theme}> */}
+            <ThemeProvider sx={{ p: 3, maxWidth: 1400, width: '100%', mx: "auto", bgcolor: "white", borderRadius: 2, boxShadow: 3 }} theme={theme}>
                 <MaterialTable sx={{padding:4}} title="Billing History" columns={columns} data={mockBillingData}
                     options={{
                         headerStyle: {
@@ -703,7 +703,7 @@ function BillingContent() {
                     }}
 
                 />
-            {/* </ThemeProvider> */}
+            </ThemeProvider>
 
         </Box >
     );
