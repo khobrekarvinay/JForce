@@ -100,23 +100,23 @@ const columns = [
         render: (rowData) => (
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
                 {rowData.status === 'downloaded' && (
-                    <DownloadIcon sx={{backgroundColor:'#EBEBED', padding:1, borderRadius:'50%'}} fontSize="small" />
+                    <DownloadIcon sx={{ backgroundColor: '#EBEBED', padding: 1, borderRadius: '50%' }} fontSize="small" />
                 )}
                 {rowData.status === 'sent' && (
-                    <CheckCircleOutlinedIcon sx={{backgroundColor:'#EBEBED', padding:1, borderRadius:'50%'}} />
+                    <CheckCircleOutlinedIcon sx={{ backgroundColor: '#EBEBED', padding: 1, borderRadius: '50%' }} />
                 )}
                 {rowData.status === 'past_due' && (
-                    <InfoIcon sx={{backgroundColor:'#FFE2E3', padding:1, borderRadius:'50%'}} fontSize="small" color="warning" />
+                    <InfoIcon sx={{ backgroundColor: '#FFE2E3', padding: 1, borderRadius: '50%' }} fontSize="small" color="warning" />
                 )}
                 {rowData.status === 'paid' && (
-                    <TonalityOutlinedIcon sx={{backgroundColor:'#DDF6E8', padding:1, borderRadius:'50%'}} fontSize="small" color="success" />
+                    <TonalityOutlinedIcon sx={{ backgroundColor: '#DDF6E8', padding: 1, borderRadius: '50%' }} fontSize="small" color="success" />
                 )}
                 {rowData.status === 'partial_payment' && (
-                    <TonalityOutlinedIcon sx={{backgroundColor:'#DDF6E8', padding:1, borderRadius:'50%'}} fontSize="small" color="success" />
+                    <TonalityOutlinedIcon sx={{ backgroundColor: '#DDF6E8', padding: 1, borderRadius: '50%' }} fontSize="small" color="success" />
                 )}
 
                 {rowData.status === 'draft' && (
-                    <SaveIcon sx={{backgroundColor:'#E9E7FD', padding:1, borderRadius:'50%'}} fontSize="small" color='secondary' />
+                    <SaveIcon sx={{ backgroundColor: '#E9E7FD', padding: 1, borderRadius: '50%' }} fontSize="small" color='secondary' />
                 )}
             </Box>
         ),
@@ -288,7 +288,7 @@ function BillingContent() {
     return (
         <Box>
             {/* Current Plan Section -----------------------------------------------------------*/}
-            <Box sx={{ p: 3, mb: 4, maxWidth: 1400, width: '100%', mx: "auto", bgcolor: "white", borderRadius: 1, boxShadow: '0px 2px 10px rgba(76, 78, 100, 0.22)' }}>
+            <Box sx={{ p: 3, mb: 4, maxWidth: 1200, mx: "auto", bgcolor: "white", borderRadius: 1, boxShadow: '0px 2px 10px rgba(76, 78, 100, 0.22)' }}>
                 <Box sx={{
                     display: 'flex',
                     gap: 4,
@@ -506,95 +506,93 @@ function BillingContent() {
                     </Box>
                 </Box>
             </Box>
+
             {/* Payment Methods Section ---------------------------------------- */}
-            <Box>
-                <CardContent>
-                    <Box sx={{ p: 3, maxWidth: 1400, width: '100%', mx: "auto", bgcolor: "white", borderRadius: 2, boxShadow: 3 }}>
-                        <Typography variant="h6" sx={{ color: '#444050' }} gutterBottom>Payment Methods</Typography>
-                        <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
+            <Box sx={{ p: 3, mb: 4, maxWidth: 1200, mx: "auto", bgcolor: "white", borderRadius: 2, boxShadow: 3 }}>
+                <Typography variant="h6" sx={{ color: '#444050' }} gutterBottom>Payment Methods</Typography>
+                <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
+                    <Stack spacing={1} flex={1}>
+                        <FormControl>
+                            <RadioGroup row sx={{ color: '#444050' }}>
+                                <FormControlLabel value="credit" control={<Radio />} label="Credit/Debit Card" />
+                                <FormControlLabel value="paypal" control={<Radio />} label="Paypal account" />
+                            </RadioGroup>
+                        </FormControl>
+                        <InputLabel>Card Number</InputLabel>
+                        <StyledTextField fullWidth placeholder="1356 3215 6548 9856" variant="outlined" sx={{ textTransform: 'none' }} />
+                        <Stack direction={{ xs: 'column', sm: 'row' }} spacing={4}>
                             <Stack spacing={1} flex={1}>
-                                <FormControl>
-                                    <RadioGroup row sx={{ color: '#444050' }}>
-                                        <FormControlLabel value="credit" control={<Radio />} label="Credit/Debit Card" />
-                                        <FormControlLabel value="paypal" control={<Radio />} label="Paypal account" />
-                                    </RadioGroup>
-                                </FormControl>
-                                <InputLabel>Card Number</InputLabel>
-                                <StyledTextField fullWidth placeholder="1356 3215 6548 9856" variant="outlined" sx={{ textTransform: 'none' }} />
-                                <Stack direction={{ xs: 'column', sm: 'row' }} spacing={4}>
-                                    <Stack spacing={1} flex={1}>
-                                        <InputLabel>Name</InputLabel>
-                                        <StyledTextField fullWidth placeholder="John Doe" variant="outlined" sx={{ textTransform: 'none' }} />
-                                    </Stack>
-                                    <Stack spacing={1} flex={1}>
-                                        <InputLabel>Exp. Date</InputLabel>
-                                        <StyledTextField fullWidth placeholder="MM/YY" variant="outlined" sx={{ textTransform: 'none' }} />
-                                    </Stack>
-                                    <Stack spacing={1} flex={1}>
-                                        <InputLabel>CVV Code</InputLabel>
-                                        <StyledTextField fullWidth placeholder="654" variant="outlined" sx={{ textTransform: 'none' }} />
-                                    </Stack>
-                                </Stack>
-                                <FormControlLabel sx={{ color: '#444050' }} control={<Switch />} label="Save card for future billing?" />
+                                <InputLabel>Name</InputLabel>
+                                <StyledTextField fullWidth placeholder="John Doe" variant="outlined" sx={{ textTransform: 'none' }} />
                             </Stack>
-
-
-                            {/* My Cards Section ------------------------------------------------------*/}
-                            <Stack spacing={2} flex={1}>
-                                <Box sx={{ display: 'flex', flexDirection: 'column', bgcolor: '#f3f2f3', padding: 2, marginBottom: 2 }}>
-                                    {/* {/_ First line: logo, edit, delete _/} */}
-                                    <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                                        <ImageWrapper>
-                                            <CenteredBox width={45} height={25} color="white" marginRight={2} component="img" src="https://demos.pixinvent.com/vuexy-html-admin-template/assets/img/icons/payments/mastercard.png" alt="masterCardImage" />
-                                        </ImageWrapper>
-                                        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                                            <Button color="primary" sx={{ color: '#6c5ce7', bgcolor: '#e9d8fd', mr: 1, textTransform: 'none' }}>Edit</Button>
-                                            <Button color="error" sx={{ color: '#c14647', bgcolor: '#ffe2e3', textTransform: 'none' }}>Delete</Button>
-                                        </Box>
-                                    </Box>
-                                    {/* Second line: name */}
-                                    <Box sx={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center', marginTop: 1 }}>
-                                        <Typography sx={{ fontSize: 15, color: '#444050', fontWeight: 'bold' }}>Tom McBride</Typography>
-                                    </Box>
-                                    {/* Third line: card number & expiry */}
-                                    <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 1 }}>
-                                        <Typography variant="body2" sx={{ color: '#6D6B77' }}>_* ** 9856</Typography>
-                                        <Typography variant="caption" color="text.secondary">Card expires at 12/26</Typography>
-                                    </Box>
-                                </Box>
-                                <Box sx={{ display: 'flex', flexDirection: 'column', bgcolor: '#f3f2f3', padding: 2, marginBottom: 2 }}>
-                                    {/* First line: logo, edit, delete */}
-                                    <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                                        <ImageWrapper>
-                                            <CenteredBox width={50} height={20} color="white" marginRight={2} component="img" src="https://demos.pixinvent.com/vuexy-html-admin-template/assets/img/icons/payments/visa.png" alt="visaImage" />
-                                        </ImageWrapper>
-                                        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                                            <Button color="primary" sx={{ color: '#6c5ce7', bgcolor: '#e9d8fd', mr: 1, textTransform: 'none' }}>Edit</Button>
-                                            <Button color="error" sx={{ color: '#c14647', bgcolor: '#ffe2e3', textTransform: 'none' }}>Delete</Button>
-                                        </Box>
-                                    </Box>
-                                    {/* Second line: name */}
-                                    <Box sx={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center', marginTop: 1 }}>
-
-                                        <Typography sx={{ fontSize: 15, color: '#444050', fontWeight: 'bold' }}>Mildred Wagner</Typography>
-                                    </Box>
-                                    {/* Third line: card number and expiry */}
-                                    <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 1 }}>
-                                        <Typography variant="body2" color="text.secondary">_* ** 9856</Typography>
-                                        <Typography variant="caption" color="text.secondary">Card expires at 10/27</Typography>
-                                    </Box>
-                                </Box>
+                            <Stack spacing={1} flex={1}>
+                                <InputLabel>Exp. Date</InputLabel>
+                                <StyledTextField fullWidth placeholder="MM/YY" variant="outlined" sx={{ textTransform: 'none' }} />
+                            </Stack>
+                            <Stack spacing={1} flex={1}>
+                                <InputLabel>CVV Code</InputLabel>
+                                <StyledTextField fullWidth placeholder="654" variant="outlined" sx={{ textTransform: 'none' }} />
                             </Stack>
                         </Stack>
-                        <Stack direction="row" gap={2}>
-                            <Button variant="contained" sx={{ textTransform: "none", backgroundColor: '#7367f0' }}>Save Changes</Button>
-                            <Button sx={{ textTransform: "none", backgroundColor: '#EBEBED' }}>Cancle</Button>
-                        </Stack>
-                    </Box>
-                </CardContent>
+                        <FormControlLabel sx={{ color: '#444050' }} control={<Switch />} label="Save card for future billing?" />
+                    </Stack>
+
+
+                    {/* My Cards Section ------------------------------------------------------*/}
+                    <Stack spacing={2} flex={1}>
+                        <Box sx={{ display: 'flex', flexDirection: 'column', bgcolor: '#f3f2f3', padding: 2, marginBottom: 2 }}>
+                            {/* {/_ First line: logo, edit, delete _/} */}
+                            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                <ImageWrapper>
+                                    <CenteredBox width={45} height={25} color="white" marginRight={2} component="img" src="https://demos.pixinvent.com/vuexy-html-admin-template/assets/img/icons/payments/mastercard.png" alt="masterCardImage" />
+                                </ImageWrapper>
+                                <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                                    <Button color="primary" sx={{ color: '#6c5ce7', bgcolor: '#e9d8fd', mr: 1, textTransform: 'none' }}>Edit</Button>
+                                    <Button color="error" sx={{ color: '#c14647', bgcolor: '#ffe2e3', textTransform: 'none' }}>Delete</Button>
+                                </Box>
+                            </Box>
+                            {/* Second line: name */}
+                            <Box sx={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center', marginTop: 1 }}>
+                                <Typography sx={{ fontSize: 15, color: '#444050', fontWeight: 'bold' }}>Tom McBride</Typography>
+                            </Box>
+                            {/* Third line: card number & expiry */}
+                            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 1 }}>
+                                <Typography variant="body2" sx={{ color: '#6D6B77' }}>_* ** 9856</Typography>
+                                <Typography variant="caption" color="text.secondary">Card expires at 12/26</Typography>
+                            </Box>
+                        </Box>
+                        <Box sx={{ display: 'flex', flexDirection: 'column', bgcolor: '#f3f2f3', padding: 2, marginBottom: 2 }}>
+                            {/* First line: logo, edit, delete */}
+                            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                <ImageWrapper>
+                                    <CenteredBox width={50} height={20} color="white" marginRight={2} component="img" src="https://demos.pixinvent.com/vuexy-html-admin-template/assets/img/icons/payments/visa.png" alt="visaImage" />
+                                </ImageWrapper>
+                                <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                                    <Button color="primary" sx={{ color: '#6c5ce7', bgcolor: '#e9d8fd', mr: 1, textTransform: 'none' }}>Edit</Button>
+                                    <Button color="error" sx={{ color: '#c14647', bgcolor: '#ffe2e3', textTransform: 'none' }}>Delete</Button>
+                                </Box>
+                            </Box>
+                            {/* Second line: name */}
+                            <Box sx={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center', marginTop: 1 }}>
+
+                                <Typography sx={{ fontSize: 15, color: '#444050', fontWeight: 'bold' }}>Mildred Wagner</Typography>
+                            </Box>
+                            {/* Third line: card number and expiry */}
+                            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 1 }}>
+                                <Typography variant="body2" color="text.secondary">_* ** 9856</Typography>
+                                <Typography variant="caption" color="text.secondary">Card expires at 10/27</Typography>
+                            </Box>
+                        </Box>
+                    </Stack>
+                </Stack>
+                <Stack direction="row" gap={2}>
+                    <Button variant="contained" sx={{ textTransform: "none", backgroundColor: '#7367f0' }}>Save Changes</Button>
+                    <Button sx={{ textTransform: "none", backgroundColor: '#EBEBED' }}>Cancle</Button>
+                </Stack>
             </Box>
+
             {/* Billing Address Card -------------------------------------------------------------------------*/}
-            <Box sx={{ p: 3, mb: 4, maxWidth: 1400, width: '100%', mx: "auto", bgcolor: "white", borderRadius: 2, boxShadow: 3 }}>
+            <Box sx={{ p: 3, mb: 4, maxWidth: 1200, mx: "auto", bgcolor: "white", borderRadius: 2, boxShadow: 3 }}>
                 <Typography variant="h6" gutterBottom sx={{ mb: 2 }}>Billing Address</Typography>
                 <Stack spacing={2}>
                     <Stack direction={{ xs: "column", sm: "row" }} spacing={2}>
@@ -657,53 +655,57 @@ function BillingContent() {
             </Box>
 
             {/* Billing card / Advance data table */}
-            <ThemeProvider sx={{ p: 3, maxWidth: 1400, width: '100%', mx: "auto", bgcolor: "white", borderRadius: 2, boxShadow: 3 }} theme={theme}>
-                <MaterialTable sx={{padding:4}} title="Billing History" columns={columns} data={mockBillingData}
-                    options={{
-                        headerStyle: {
-                            color: '#444050', textTransform: 'uppercase', fontWeight: 'bold'
-                        },
-                        selection: true,
-                        searchFieldVariant: 'standard', searchAutoFocus: true,
-                        searchFieldStyle: {
-                            '& .MuiOutlinedInput-root': {
-                                height: '40px',
-                                fontSize: '0.875rem',
-                                fontFamily: '"Public Sans", sans-serif',
-                                backgroundColor: '#fff',
-                                '& input': {
-                                    padding: '8px 14px',
-                                    '&::placeholder': {
-                                        fontSize: '0.875rem',
-                                        opacity: 0.5,
-                                        fontFamily: '"Public Sans", sans-serif',
+            <Box sx={{ p: 3, mb: 4, maxWidth: 1200, mx: "auto", bgcolor: "white", borderRadius: 2, boxShadow: 3 }}>
+                <ThemeProvider theme={theme}>
+                    <MaterialTable sx={{ padding: 4 }} title="Billing History" columns={columns} data={mockBillingData}
+                        options={{
+                            headerStyle: {
+                                color: '#444050', textTransform: 'uppercase', fontWeight: 'bold'
+                            },
+                            selection: true,
+                            searchFieldVariant: 'standard', searchAutoFocus: true,
+                            searchFieldStyle: {
+                                '& .MuiOutlinedInput-root': {
+                                    height: '40px',
+                                    fontSize: '0.875rem',
+                                    fontFamily: '"Public Sans", sans-serif',
+                                    backgroundColor: '#fff',
+                                    '& input': {
+                                        padding: '8px 14px',
+                                        '&::placeholder': {
+                                            fontSize: '0.875rem',
+                                            opacity: 0.5,
+                                            fontFamily: '"Public Sans", sans-serif',
+                                        },
+                                    },
+                                    '& .MuiOutlinedInput-notchedOutline': {
+                                        borderColor: 'rgba(0, 0, 0, 0.23)',
+                                        borderWidth: '1px',
+                                    },
+                                    '&:hover .MuiOutlinedInput-notchedOutline': {
+                                        borderColor: 'rgba(0, 0, 0, 0.87)',
+                                        borderWidth: '1px',
+                                    },
+                                    '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                                        borderColor: 'rgb(115, 103, 240)',
+                                        borderWidth: '2px',
                                     },
                                 },
-                                '& .MuiOutlinedInput-notchedOutline': {
-                                    borderColor: 'rgba(0, 0, 0, 0.23)',
-                                    borderWidth: '1px',
-                                },
-                                '&:hover .MuiOutlinedInput-notchedOutline': {
-                                    borderColor: 'rgba(0, 0, 0, 0.87)',
-                                    borderWidth: '1px',
-                                },
-                                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                                    borderColor: 'rgb(115, 103, 240)',
-                                    borderWidth: '2px',
-                                },
                             },
-                        },
-                        paging: true, pageSizeOptions: [10, 25, 50, 100], pageSize: 10, showFirstLastPageButtons: false, paginationType: 'stepped',
-                    }}
+                            paging: true, pageSizeOptions: [10, 25, 50, 100], pageSize: 10, showFirstLastPageButtons: false, 
+                            paginationType: 'stepped', paginationPosition:'top',
+                            paginationAlignment:'flex-start'
+                        }}
 
-                    localization={{
-                        pagination: {
-                            labelRowsPerPage: 'Show'
-                        }
-                    }}
+                        localization={{
+                            pagination: {
+                                labelRowsPerPage: 'Show'
+                            }
+                        }}
 
-                />
-            </ThemeProvider>
+                    />
+                </ThemeProvider>
+            </Box>
 
         </Box >
     );

@@ -109,7 +109,7 @@ function AccountPage() {
     };
 
     return (
-        <Box sx={{ display: 'flex', width: '100%', minHeight: '100vh', backgroundColor: '#f8f7fa' }}>
+        <Box sx={{ display: 'flex', width: '100%', minHeight: '100vh', backgroundColor: '' }}>
             {/* Quick Access Bar */}
             {!isSidebarHidden && (
                 <Box sx={{ width: 220, backgroundColor: '#2f3349', height: '100vh', position: 'fixed', top: 0, left: 0, zIndex: 1, padding: 2 }}>
