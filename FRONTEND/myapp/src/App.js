@@ -11,6 +11,7 @@ import UpdateExpense from "./components/UpdateExpense";
 import MaterialUIDemo from "./components/MaterialUI";
 import LoginPage from "./components/Vuexy";
 import AccountPage from "./VueWebsite/Mainacc";
+import Pricing from "./VueWebsite/Pricing";
 
 
 const App = () => {
@@ -28,6 +29,7 @@ const App = () => {
         <Route path="/" element={<MaterialUIDemo/>} />
         <Route path="/abc" element={<LoginPage/>} />
         <Route path="/qwerty" element={<AccountPage/>} />
+        <Route path="/price" element={<Pricing />} />
 
       </Routes>
     </Router>

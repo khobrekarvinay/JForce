@@ -144,7 +144,7 @@ const columns = [
     {
         title: "Balance", field: "balance",
         cellStyle: {
-            color: '#28C76F'
+            color: '#28C76F',
         }
     },
     {

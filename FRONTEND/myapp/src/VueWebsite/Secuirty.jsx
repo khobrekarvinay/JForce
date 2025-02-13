@@ -233,10 +233,7 @@ function SecurityContent() {
           <Button sx={{ textTransform: "none", backgroundColor: '#EBEBED', color: '#808390' }}>Cancel</Button>
         </Stack>
       </Box>
-
-
-
-
+      
       {/* verification section */}
       <Box sx={{ p: 3, maxWidth: 1200, mx: "auto", bgcolor: "white", borderRadius: 2, boxShadow: 3, marginBottom: '30px' }}>
 
