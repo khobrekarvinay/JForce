@@ -1,8 +1,20 @@
 
-/* Customize the buttons */
+
 .fc-toolbar-chunk .fc-button {
     background-color: rgba(115, 103, 240, 0.24) !important; 
     color: #7367f0 !important; 
     border: none !important;
 }
+
+.fc .fc-timegrid-slot {
+  height: 100px; 
+}
+
+/* .event-personal { background-color: #ff5722 !important; color: white !important; }
+.event-business { background-color: #3f51b5 !important; color: white !important; }
+.event-family { background-color: #4caf50 !important; color: white !important; }
+.event-holiday { background-color: #ffeb3b !important; color: black !important; }
+.event-etc { background-color: #9c27b0 !important; color: white !important; } */
+
+
 
