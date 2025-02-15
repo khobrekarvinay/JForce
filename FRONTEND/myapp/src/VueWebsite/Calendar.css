@@ -1,0 +1,8 @@
+
+/* Customize the buttons */
+.fc-toolbar-chunk .fc-button {
+    background-color: rgba(115, 103, 240, 0.24) !important; 
+    color: #7367f0 !important; 
+    border: none !important;
+}
+

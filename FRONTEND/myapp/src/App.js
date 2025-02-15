@@ -12,6 +12,7 @@ import MaterialUIDemo from "./components/MaterialUI";
 import LoginPage from "./components/Vuexy";
 import AccountPage from "./VueWebsite/Mainacc";
 import Pricing from "./VueWebsite/Pricing";
+import AppCalender from "./VueWebsite/AppCalender";
 
 
 const App = () => {
@@ -30,6 +31,7 @@ const App = () => {
         <Route path="/abc" element={<LoginPage/>} />
         <Route path="/qwerty" element={<AccountPage/>} />
         <Route path="/price" element={<Pricing />} />
+        <Route path="/calender" element={<AppCalender />} />
 
       </Routes>
     </Router>
