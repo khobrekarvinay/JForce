@@ -66,10 +66,10 @@ const AppCalendar = () => {
         setModalOpen(false);
     };
 
-    // Filter Events Based on Selected Categories
+    // Filter Based on Selected Categories
     const filteredEvents = currentEvents.filter(event => filters.all || filters[event.category]);
 
-    // Handle Filter Change
+    // Filter Change
     const handleFilterChange = (category) => {
         setFilters((prev) => {
             const newFilters = { ...prev, [category]: !prev[category] };
