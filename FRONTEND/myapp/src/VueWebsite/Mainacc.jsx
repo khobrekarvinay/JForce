@@ -28,12 +28,12 @@ import ExpandMore from '@mui/icons-material/ExpandMore';
 import DescriptionOutlinedIcon from '@mui/icons-material/Description';
 import SearchIcon from '@mui/icons-material/Search';
 import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
-import Account from './pages/Account';
-import SecurityContent from './pages/Secuirty';
+import Account from './Pages/Account';
+import SecurityContent from './Pages/Secuirty';
 import SecurityIcon from '@mui/icons-material/Security';
-import BillingContent from './pages/Billing&Plans';
-import NotificationsContent from './pages/Notifications';
-import ConnectionsContent from './pages/ConnectionsContent';
+import BillingContent from './Pages/Billing&Plans';
+import NotificationsContent from './Pages/Notifications';
+import ConnectionsContent from './Pages/ConnectionsContent';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import LockIcon from '@mui/icons-material/Lock';
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
@@ -45,13 +45,13 @@ import MonetizationOnOutlinedIcon from '@mui/icons-material/MonetizationOnOutlin
 import NotificationsOutlinedIcon from '@mui/icons-material/NotificationsOutlined';
 import PeopleOutlinedIcon from '@mui/icons-material/PeopleOutlined';
 import Popper from '@mui/material/Popper';
-import Footer from './pages/Footer';
+import Footer from './Pages/Footer';
 import ProfilePopper from './SearchBar/SearchAccount';
 import HeaderSearch from './SearchBar/Searchbox';
 import EmailDashboard from './Email/emaildash';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import AppCalendar from './Calendar/AppCalender';
-import Pricing from './pages/Pricing';
+import Pricing from './Pages/Pricing';
 
 
 const SearchContainer = styled(Box)(({ theme }) => ({
@@ -222,7 +222,18 @@ function AccountPage() {
     };
     const handleChange = (event, newValue) => {
         setTabValue(newValue);
-        if (newValue === 5) {
+        if (newValue === 0) {
+            handleListItemClick(event, '2.2.1');
+          } else if (newValue === 1) {
+            handleListItemClick(event, '2.2.2');
+          } else if (newValue === 2) {
+            handleListItemClick(event, '2.2.3');
+          } else if (newValue === 3) {
+            handleListItemClick(event, '2.2.4');
+          } else if (newValue === 4) {
+            handleListItemClick(event, '2.2.5');
+          }
+        else if (newValue === 5) {
             handleListItemClick(event, '1.1');
         } else if (newValue === 6) {
             handleListItemClick(event, '2.3');
