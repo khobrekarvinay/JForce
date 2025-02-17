@@ -288,7 +288,7 @@ function BillingContent() {
     return (
         <Box>
             {/* Current Plan Section -----------------------------------------------------------*/}
-            <Box sx={{ p: 3, mb: 4, maxWidth: 1200, mx: "auto", bgcolor: "white", borderRadius: 1, boxShadow: '0px 2px 10px rgba(76, 78, 100, 0.22)' }}>
+            <Box sx={{ mb: 4, maxWidth: 1200, mx: "auto", bgcolor: "white", borderRadius: 1}}>
                 <Box sx={{
                     display: 'flex',
                     gap: 4,
@@ -655,7 +655,7 @@ function BillingContent() {
             </Box>
 
             {/* Billing card / Advance data table */}
-            <Box sx={{ p: 3, mb: 4, maxWidth: 1200, mx: "auto", bgcolor: "white", borderRadius: 2, boxShadow: 3 }}>
+            <Box sx={{ mb: 4, maxWidth: 1200, mx: "auto", bgcolor: "white", borderRadius: 2}}>
                 <ThemeProvider theme={theme}>
                     <MaterialTable sx={{ padding: 4 }} title="Billing History" columns={columns} data={mockBillingData}
                         options={{

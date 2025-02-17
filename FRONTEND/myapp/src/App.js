@@ -9,10 +9,10 @@ import AddExpense from "./components/AddExpense";
 import ExpenseList from "./components/ExpenseList";
 import UpdateExpense from "./components/UpdateExpense";
 import MaterialUIDemo from "./components/MaterialUI";
-import LoginPage from "./components/Vuexy";
+// import LoginPage from "./components/Vuexy";
 import AccountPage from "./VueWebsite/Mainacc";
-import Pricing from "./VueWebsite/Pricing";
-import AppCalender from "./VueWebsite/AppCalender";
+import Pricing from "./VueWebsite/pages/Pricing";
+import AppCalender from "./VueWebsite/Calendar/AppCalender";
 
 
 const App = () => {
@@ -28,10 +28,10 @@ const App = () => {
         <Route path="/expense-list" element={<ExpenseList />} />
         <Route path="/update-expense/:id" element={<UpdateExpense />} /> */}
         <Route path="/" element={<MaterialUIDemo/>} />
-        <Route path="/abc" element={<LoginPage/>} />
+        {/* <Route path="/abc" element={<LoginPage/>} /> */}
         <Route path="/qwerty" element={<AccountPage/>} />
-        <Route path="/price" element={<Pricing />} />
-        <Route path="/calendar" element={<AppCalender />} />
+         <Route path="/price" element={<Pricing />}/>
+        <Route path="/calendar" element={<AppCalender />} /> 
 
       </Routes>
     </Router>

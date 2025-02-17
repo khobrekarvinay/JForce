@@ -14,7 +14,7 @@ const NotificationsContent = () => {
   return (
     <Box sx={{ maxWidth: 1400, mx: 'auto' }}>
 
-      <Card sx={{ boxShadow: '0px 2px 10px rgba(76, 78, 100, 0.22)', borderRadius: 2 }}>
+      <Card sx={{ borderRadius: 2 }}>
         <CardContent>
           {/* Recent Devices Section */}
           <Box sx={{ mb: 4 }}>

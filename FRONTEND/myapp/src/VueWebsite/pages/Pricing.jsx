@@ -23,6 +23,7 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import TwitterIcon from '@mui/icons-material/Twitter';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 
 const pages = ['Home', 'Features', 'Team', 'FAQ', 'Contact us', 'Pages', 'Admin'];
@@ -131,6 +132,9 @@ export default function Pricing(props) {
     const handleChange = (panel) => (event, isExpanded) => {
         setExpanded(isExpanded ? panel : false);
     };
+    const navigate = useNavigate();
+    const location = useLocation();
+
 
     return (
         <>
@@ -213,7 +217,7 @@ export default function Pricing(props) {
             </Box>
 
             {/* Cards */}
-            <Box sx={{ display: 'flex', gap: '25px', flexWrap: 'wrap', justifyContent: 'center', padding: '20px 0px', maxWidth: 1300, mx: "auto", bgcolor: "white", marginBottom: '30px' }} >
+            <Box sx={{ display: 'flex', gap: '25px', flexWrap: 'nowrap', justifyContent: 'center', padding: '20px 0px', maxWidth: 1300, mx: "auto", bgcolor: "white", marginBottom: '30px' }} >
                 {/* Basic Plan */}
                 <Box sx={{ padding: '40px 20px 20px 20px', color: '#6D6B77', width: '100%', maxWidth: '375px', flexGrow: 1, borderRadius: 2, border: '1px solid #e6e6e8' }}>
                     <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "200px" }}>
@@ -388,7 +392,9 @@ export default function Pricing(props) {
                         {/* vuexy Column */}
                         <Box sx={{ gridColumn: { xs: '1', md: '1 / span 1' }, padding: '0px 0px', marginLeft: { lg: '80px' } }}>
                             <Typography variant="h5" component="div" sx={{ mb: 2, display: 'flex', alignItems: 'center', gap: 1 }}>
-                                <img src="https://cdn.pixinvent.com/pi-assets/vuexy/admin-template/logo/logo.svg" alt="Logo" style={{ width: 50, height: 40, display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+                                <Box onClick={() => navigate('/qwerty', { replace: true, state: { from: location } })} sx={{ cursor: 'pointer' }}>
+                                    <img src="https://cdn.pixinvent.com/pi-assets/vuexy/admin-template/logo/logo.svg" alt="Logo" style={{ width: 50, height: 40, display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+                                </Box>
                                 Vuexy
                             </Typography>
                             <Typography variant="body1" sx={{ mb: 4 }}>

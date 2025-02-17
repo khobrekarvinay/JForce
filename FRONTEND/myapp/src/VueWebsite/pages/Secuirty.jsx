@@ -107,7 +107,7 @@ function SecurityContent() {
   return (
     <>
       {/* change password section */}
-      <Box sx={{ p: 3, maxWidth: 1200, mx: "auto", bgcolor: "white", borderRadius: 2, boxShadow: 3, marginBottom: '30px' }}>
+      <Box sx={{ maxWidth: 1200, mx: "auto", bgcolor: "white", borderRadius: 2, marginBottom: '30px' }}>
         <Typography variant='h5' sx={{ color: '#444050', paddingBottom: '30px' }}>Change Password</Typography>
         <Stack direction={{ xs: "column", sm: "row" }} spacing={2} sx={{ paddingBottom: '30px' }}>
           <Stack spacing={1} flex={1}>

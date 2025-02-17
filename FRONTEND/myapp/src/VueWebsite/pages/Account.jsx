@@ -69,7 +69,7 @@ export default function Account() {
 
     return (
         <>
-            <Box sx={{ p: 3, maxWidth: 1200, mx: "auto", bgcolor: "white", borderRadius: 2, boxShadow: 3 }}>
+            <Box sx={{ maxWidth: 1200, mx: "auto", bgcolor: "white", borderRadius: 2 }}>
                 <Stack spacing={2}>
                     <Box display='flex' spacing={2} alignItems="center">
                         <Stack><Avatar src="/photo.png" sx={{ width: 100, height: 100, borderRadius: 2 }} /></Stack>
