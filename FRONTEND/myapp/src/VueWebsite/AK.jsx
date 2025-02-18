@@ -4,130 +4,111 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import listPlugin from "@fullcalendar/list";
-import { Box, Button, Checkbox, Divider, FormControlLabel, FormGroup, Paper, Typography, useTheme } from "@mui/material";
-import { tokens } from "../theme";
+import { Box, Button, Paper, Divider, Typography, Drawer, IconButton, FormControlLabel, Checkbox, FormGroup, } from "@mui/material";
 import { LocalizationProvider } from "@mui/x-date-pickers";
-import { DemoContainer, DemoItem } from "@mui/x-date-pickers/internals/demo";
 import { DateRangeCalendar } from "@mui/x-date-pickers-pro/DateRangeCalendar";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { Menu, Plus } from "lucide-react";
+import AddEventModal from "./AddEventModal";
 import "./Calendar.css";
-import { Plus } from "lucide-react";
 
-const AppCalender = () => {
-    const theme = useTheme();
-    const colors = tokens(theme.palette.mode);
-    
-    // Default events list
+const AppCalendar = () => {
+
+    // event filters
+    const [filters, setFilters] = useState({
+        all: true,
+        personal: true,
+        business: true,
+        family: true,
+        holiday: true,
+        etc: true,
+    });
+
+    // Event List
     const [currentEvents, setCurrentEvents] = useState([
-        {
-            id: "1",
-            title: "Dinner",
-            start: "2025-02-15T00:00:00",
-            allDay: false,
-        },
-        {
-            id: "2",
-            title: "Dart Game?",
-            start: "2025-02-15T10:25:00",
-            allDay: true,
-        },
-        {
-            id: "3",
-            title: "Meditation",
-            start: "2025-02-15T13:00:00",
-            allDay: true,
-        },
-        {
-            id: "4",
-            title: "Product Review",
-            start: "2025-02-15T15:00:00",
-            allDay: true,
-        },
-        {
-            id: "5",
-            title: "Design Review",
-            start: "2025-02-15T12:53:00",
-            start: "2025-02-15T00:00:00",
-            allDay: true,
-        },
+        { id: "1", title: "Dinner", start: "2025-02-15T00:00:00", allDay: false, category: "family" },
+        { id: "2", title: "Dart Game?", start: "2025-02-15T10:25:00", allDay: true, category: "etc" },
+        { id: "3", title: "Meditation", start: "2025-02-15T13:00:00", allDay: true, category: "personal" },
+        { id: "4", title: "Product Review", start: "2025-02-15T15:00:00", allDay: true, category: "business" },
+        { id: "5", title: "Doctors Appointment", start: "2025-02-17T00:00:00", allDay: false, category: "family" },
+        { id: "6", title: "Meeting With Client", start: "2025-02-17T00:00:00", allDay: true, category: "business" },
+        { id: "7", title: "Family Trip", start: "2025-02-19T00:00:00", end: "2025-02-20T00:00:00", allDay: true, category: "holiday" },
     ]);
 
+    const [modalOpen, setModalOpen] = useState(false);
+    const [selectedDate, setSelectedDate] = useState(null);
+    const [sidebarOpen, setSidebarOpen] = useState(false);
+    // Date Click
     const handleDateClick = (selected) => {
-        const title = prompt("Please enter a new title for your event");
-        const calendarApi = selected.view.calendar;
-        calendarApi.unselect();
+        setSelectedDate(selected.startStr);
+        setModalOpen(true);
+    };
 
-        if (title) {
-            const newEvent = {
-                id: `${selected.dateStr}-${title}`,
-                title,
-                start: selected.startStr,
-                end: selected.endStr,
-                allDay: selected.allDay,
-            };
-
-            calendarApi.addEvent(newEvent);
-            setCurrentEvents(prevEvents => [...prevEvents, newEvent]); // Update state properly
+    // Handle Click (Delete)
+    const handleEventClick = (selected) => {
+        if (window.confirm(`Are you sure you want to delete '${selected.event.title}'?`)) {
+            selected.event.remove();
+            setCurrentEvents((prev) => prev.filter((event) => event.id !== selected.event.id));
         }
     };
 
-    const handleEventClick = (selected) => {
-        if (window.confirm(`Are you sure you want to delete the event '${selected.event.title}'?`)) {
-            selected.event.remove();
-            setCurrentEvents(prevEvents => prevEvents.filter(event => event.id !== selected.event.id)); // Remove event properly
-        }
+    // Adding New Event
+    const handleAddEvent = (eventData) => {
+        const newEvent = {
+            id: `${eventData.startDate}-${eventData.title}`,
+            title: eventData.title,
+            start: eventData.startDate,
+            end: eventData.endDate,
+            allDay: eventData.allDay,
+            category: eventData.category,
+        };
+        setCurrentEvents((prev) => [...prev, newEvent]);
+        setModalOpen(false);
+    };
+
+    // Filter Based on Selected Categories
+    const filteredEvents = currentEvents.filter(event => filters.all || filters[event.category]);
+
+    // Filter Change
+    const handleFilterChange = (category) => {
+        setFilters((prev) => {
+            const newFilters = { ...prev, [category]: !prev[category] };
+            if (category === "all") {
+                Object.keys(newFilters).forEach((key) => {
+                    newFilters[key] = newFilters.all;
+                });
+            } else {
+                newFilters.all = Object.values(newFilters).slice(1).every(Boolean);
+            }
+            return newFilters;
+        });
     };
 
     return (
         <Box m="20px">
+            {/* Toggle Button */}
+            <IconButton onClick={() => setSidebarOpen(true)} sx={{ display: { md: "none" }, mb: 2 }}>
+                <Menu size={24} />
+            </IconButton>
+
             <Box display="flex" justifyContent="space-between">
-                {/* Calendar Sidebar */}
-                <Box flex="1 1 20%">
-                    <Paper>
-                        <Box sx={{ padding: "14px 15px" }}>
-                            <Button
-                                startIcon={<Plus />}
-                                fullWidth
-                                variant="contained"
-                                sx={{ bgcolor: "#7367f0", "&:hover": { bgcolor: "#6054e6" }, textTransform: "none" }}
-                            >
-                                Add Event
-                            </Button>
-                        </Box>
-                        <Divider sx={{ mb: 0 }} />
-                        <LocalizationProvider dateAdapter={AdapterDayjs}>
-                            <DemoContainer components={["DateRangeCalendar", "DateRangeCalendar"]}>
-                                <DemoItem>
-                                    <DateRangeCalendar calendars={1} />
-                                </DemoItem>
-                            </DemoContainer>
-                        </LocalizationProvider>
-                        <Divider sx={{ mb: 0 }} />
-                        <FormGroup sx={{ p: 2 }}>
-                            <Typography variant="h6" sx={{ mb: 1, color: "#444050" }}>
-                                Event Filters
-                            </Typography>
-                            {[
-                                { label: "View All", color: "default" },
-                                { label: "Personal", color: "error" },
-                                { label: "Business", color: "primary" },
-                                { label: "Family", color: "success" },
-                                { label: "Holiday", color: "warning" },
-                                { label: "ETC", color: "info" },
-                            ].map(filter => (
-                                <FormControlLabel
-                                    key={filter.label}
-                                    control={<Checkbox defaultChecked color={filter.color} />}
-                                    label={filter.label}
-                                    sx={{ color: "#444050" }}
-                                />
-                            ))}
-                        </FormGroup>
-                    </Paper>
+                {/* Sidebar Drawer for small screens */}
+                <Drawer
+                    anchor="left"
+                    open={sidebarOpen}
+                    onClose={() => setSidebarOpen(false)}
+                    sx={{ display: { md: "none" } }}
+                >
+                    <SidebarContent setModalOpen={setModalOpen} filters={filters} handleFilterChange={handleFilterChange} />
+                </Drawer>
+
+                {/* Sidebar for larger screens */}
+                <Box flex="1 1 20%" sx={{ display: { xs: "none", md: "block" } }}>
+                    <SidebarContent setModalOpen={setModalOpen} filters={filters} handleFilterChange={handleFilterChange} />
                 </Box>
 
                 {/* Calendar */}
-                <Box flex="1 1 100%" ml="15px">
+                <Box flex="1 1 100%" ml={{ md: "15px" }}>
                     <FullCalendar
                         height="100vh"
                         plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin, listPlugin]}
@@ -143,12 +124,85 @@ const AppCalender = () => {
                         dayMaxEvents={true}
                         select={handleDateClick}
                         eventClick={handleEventClick}
-                        events={currentEvents}
+                        events={filteredEvents} // Apply filtered events
+
+                        eventDidMount={(eventInfo) => {
+                            // Define category colors
+                            const categoryColors = {
+                                personal: "#ff4c51",  // Red
+                                business: "#7367f0",  // Purple
+                                family: "#ff9f43",  // Orange
+                                holiday: "#28c76f",  // Green
+                                etc: "#00bad1",  // Cyan
+                            };
+                        
+                            // Get category color (fallback to default)
+                            const bgColor = categoryColors[eventInfo.event.extendedProps.category] || "#007bff";
+                        
+                            // Apply background and text colors for Grid Views (Month/Week/Day)
+                            if (!eventInfo.view.type.includes("list")) {
+                                eventInfo.el.style.backgroundColor = bgColor;
+                                eventInfo.el.style.borderColor = bgColor;
+                                eventInfo.el.style.color = "#fff"; // Ensure contrast
+                            }
+                        
+                            // Apply dot color in List View
+                            let dot = eventInfo.el.querySelector(".fc-list-event-dot");
+                            if (dot) {
+                                dot.style.backgroundColor = bgColor;
+                                dot.style.borderColor = bgColor;
+                            }
+                        }}
+                        
                     />
                 </Box>
             </Box>
+
+            {/* Add Event Modal */}
+            <AddEventModal open={modalOpen} onClose={() => setModalOpen(false)} selectedDate={selectedDate} onAddEvent={handleAddEvent} />
         </Box>
     );
 };
 
-export default AppCalender;
+// Sidebar Component with Filters
+const SidebarContent = ({ setModalOpen, filters, handleFilterChange }) => (
+    <Paper sx={{ width: "300px", height: "96vh", padding: "14px 15px", display: "flex", flexDirection: "column" }}>
+        <Button
+            startIcon={<Plus />}
+            fullWidth
+            variant="contained"
+            sx={{ bgcolor: "#7367f0", "&:hover": { bgcolor: "#6054e6" }, textTransform: "none" }}
+            onClick={() => setModalOpen(true)}
+        >
+            Add Event
+        </Button>
+        <Divider sx={{ mb: 1, width: "100%" }} />
+
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DateRangeCalendar calendars={1} sx={{ width: "100%", maxHeight: "300px", overflow: "hidden" }} />
+        </LocalizationProvider>
+
+        <Divider sx={{ mt: 2 }} />
+
+        <FormGroup sx={{ p: 2 }}>
+            <Typography variant="h6" sx={{ mb: 1, color: "#444050" }}>Event Filters</Typography>
+            {[
+                { label: "View All", key: "all", color: "default" },
+                { label: "Personal", key: "personal", color: "error" },
+                { label: "Business", key: "business", color: "primary" },
+                { label: "Family", key: "family", color: "success" },
+                { label: "Holiday", key: "holiday", color: "warning" },
+                { label: "ETC", key: "etc", color: "info" },
+            ].map((filter) => (
+                <FormControlLabel
+                    key={filter.key}
+                    control={<Checkbox color={filter.color} checked={filters[filter.key]} onChange={() => handleFilterChange(filter.key)} />}
+                    label={filter.label}
+                    sx={{ color: "#444050" }}
+                />
+            ))}
+        </FormGroup>
+    </Paper>
+);
+
+export default AppCalendar;

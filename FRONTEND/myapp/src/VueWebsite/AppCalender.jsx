@@ -11,6 +11,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { Menu, Plus } from "lucide-react";
 import AddEventModal from "./AddEventModal";
 import "./Calendar.css";
+import EditEventModal from "./EditEventModal";
 
 const AppCalendar = () => {
 
@@ -26,13 +27,13 @@ const AppCalendar = () => {
 
     // Event List
     const [currentEvents, setCurrentEvents] = useState([
-        { id: "1", title: "Dinner", start: "2025-02-15T00:00:00", allDay: false, category: "personal" },
-        { id: "2", title: "Dart Game?", start: "2025-02-15T10:25:00", allDay: true, category: "personal" },
+        { id: "1", title: "Dinner", start: "2025-02-15T00:00:00", allDay: false, category: "family" },
+        { id: "2", title: "Dart Game?", start: "2025-02-15T10:25:00", allDay: true, category: "etc" },
         { id: "3", title: "Meditation", start: "2025-02-15T13:00:00", allDay: true, category: "personal" },
         { id: "4", title: "Product Review", start: "2025-02-15T15:00:00", allDay: true, category: "business" },
         { id: "5", title: "Doctors Appointment", start: "2025-02-17T00:00:00", allDay: false, category: "family" },
         { id: "6", title: "Meeting With Client", start: "2025-02-17T00:00:00", allDay: true, category: "business" },
-        { id: "7", title: "Family Trip", start: "2025-02-19T00:00:00", end: "2025-02-20T00:00:00", allDay: true, category: "family" },
+        { id: "7", title: "Family Trip", start: "2025-02-19T00:00:00", end: "2025-02-20T00:00:00", allDay: true, category: "holiday" },
     ]);
 
     const [modalOpen, setModalOpen] = useState(false);
@@ -44,26 +45,50 @@ const AppCalendar = () => {
         setModalOpen(true);
     };
 
-    // Handle Click (Delete)
-    const handleEventClick = (selected) => {
-        if (window.confirm(`Are you sure you want to delete '${selected.event.title}'?`)) {
-            selected.event.remove();
-            setCurrentEvents((prev) => prev.filter((event) => event.id !== selected.event.id));
-        }
-    };
-
     // Adding New Event
     const handleAddEvent = (eventData) => {
         const newEvent = {
             id: `${eventData.startDate}-${eventData.title}`,
             title: eventData.title,
             start: eventData.startDate,
-            end: eventData.endDate,
+            end: eventData.endDate || eventData.startDate, // Ensure end date is handled
             allDay: eventData.allDay,
-            category: eventData.category,
+            category: eventData.category || "personal", // Use selected category or fallback to "personal"
         };
+    
         setCurrentEvents((prev) => [...prev, newEvent]);
         setModalOpen(false);
+    };        
+
+    const [selectedEvent, setSelectedEvent] = useState(null);
+    const [editModalOpen, setEditModalOpen] = useState(false);
+
+    const handleEditEventClick = (selected) => {
+        setSelectedEvent({
+            id: selected.event.id,
+            title: selected.event.title,
+            startDate: selected.event.start.toISOString().split("T")[0],  // Format date properly
+            endDate: selected.event.end ? selected.event.end.toISOString().split("T")[0] : selected.event.start.toISOString().split("T")[0],
+            allDay: selected.event.allDay,
+            category: selected.event.extendedProps.category || "personal", // Set default category
+        });
+        setEditModalOpen(true);
+    };       
+
+    // Update Event List
+    const handleUpdateEvent = (updatedEvent) => {
+        setCurrentEvents((prevEvents) =>
+            prevEvents.map((event) =>
+                event.id === updatedEvent.id ? { ...event, ...updatedEvent } : event
+            )
+        );
+        setEditModalOpen(false);
+    };
+    
+    // Delete Event from Edit Modal
+    const handleDeleteEvent = (eventId) => {
+        setCurrentEvents((prev) => prev.filter((event) => event.id !== eventId));
+        setEditModalOpen(false);
     };
 
     // Filter Based on Selected Categories
@@ -85,7 +110,7 @@ const AppCalendar = () => {
     };
 
     return (
-        <Box m="20px">
+        <Box m="20px" p='30px'>
             {/* Toggle Button */}
             <IconButton onClick={() => setSidebarOpen(true)} sx={{ display: { md: "none" }, mb: 2 }}>
                 <Menu size={24} />
@@ -110,6 +135,7 @@ const AppCalendar = () => {
                 {/* Calendar */}
                 <Box flex="1 1 100%" ml={{ md: "15px" }}>
                     <FullCalendar
+                        key={currentEvents.length}
                         height="100vh"
                         plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin, listPlugin]}
                         headerToolbar={{
@@ -123,25 +149,53 @@ const AppCalendar = () => {
                         selectMirror={true}
                         dayMaxEvents={true}
                         select={handleDateClick}
-                        eventClick={handleEventClick}
+                        eventClick={handleEditEventClick}
                         events={filteredEvents} // Apply filtered events
 
                         eventDidMount={(eventInfo) => {
-                            // Define color mapping for categories
-                            const categoryColors = { personal: "#ff5722", business: "#3f51b5", family: "#4caf50", holiday: "#ffeb3b", etc: "#9c27b0", };
+                            // Define category colors
+                            const categoryColors = {
+                                personal: "#ff4c51",  // Red
+                                business: "#7367f0",  // Purple
+                                family: "#ff9f43",  // Orange
+                                holiday: "#28c76f",  // Green
+                                etc: "#00bad1",  // Cyan
+                            };
 
+                            // Get category color (fallback to default)
                             const bgColor = categoryColors[eventInfo.event.extendedProps.category] || "#007bff";
 
+                            // Apply background and text colors for Grid Views (Month/Week/Day)
                             if (!eventInfo.view.type.includes("list")) {
-                                eventInfo.el.style.backgroundColor = bgColor; eventInfo.el.style.borderColor = bgColor; eventInfo.el.style.color = "#fff";
+                                eventInfo.el.style.backgroundColor = bgColor;
+                                eventInfo.el.style.borderColor = bgColor;
+                                eventInfo.el.style.color = "#fff"; // Ensure contrast
+                            }
+
+                            // Apply dot color in List View
+                            let dot = eventInfo.el.querySelector(".fc-list-event-dot");
+                            if (dot) {
+                                dot.style.backgroundColor = bgColor;
+                                dot.style.borderColor = bgColor;
                             }
                         }}
+
                     />
                 </Box>
             </Box>
 
             {/* Add Event Modal */}
             <AddEventModal open={modalOpen} onClose={() => setModalOpen(false)} selectedDate={selectedDate} onAddEvent={handleAddEvent} />
+
+            {/* Edit Event modal */}
+            <EditEventModal
+                open={editModalOpen}
+                onClose={() => setEditModalOpen(false)}
+                eventData={selectedEvent}
+                onUpdateEvent={handleUpdateEvent}
+                onDeleteEvent={handleDeleteEvent}
+            />
+
         </Box>
     );
 };
