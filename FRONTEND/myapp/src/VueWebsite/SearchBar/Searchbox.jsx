@@ -37,7 +37,11 @@ const HeaderSearch = () => {
     };
 
     return (
+<<<<<<< Updated upstream
         <Box sx={{ display: 'flex', alignItems: 'center', mb: 4, maxWidth: 1400, mx: "auto", mt: 2 }}>
+=======
+        <Box sx={{ display: 'flex', alignItems: 'center', mb: 4, maxWidth: 1300, mx: "auto" }}>
+>>>>>>> Stashed changes
             <Paper sx={{
                 padding: '4px 12px',
                 display: 'flex',
