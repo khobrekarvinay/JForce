@@ -40,7 +40,11 @@ const HeaderSearch = () => {
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         <Box sx={{ display: 'flex', alignItems: 'center', mb: 4, maxWidth: 1400, mx: "auto", mt: 2 }}>
+=======
+        <Box sx={{ display: 'flex', alignItems: 'center', mb: 4, maxWidth: 1300, mx: "auto" }}>
+>>>>>>> Stashed changes
 =======
         <Box sx={{ display: 'flex', alignItems: 'center', mb: 4, maxWidth: 1300, mx: "auto" }}>
 >>>>>>> Stashed changes
